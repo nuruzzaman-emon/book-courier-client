@@ -1,5 +1,6 @@
 import React from "react";
 import animationData from "./JustFlowTeal.json";
+import Lottie from "lottie-react";
 
 const Loading = () => {
   return (

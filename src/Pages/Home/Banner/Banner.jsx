@@ -1,9 +1,9 @@
 import React from "react";
-import useHook from "../../../hooks/useHook";
+import useHook from "../../../hooks/useAuth";
 
 const Banner = () => {
   const { createUser } = useHook();
-  console.log(createUser);
+  // console.log(createUser);
   return <div>this is banner</div>;
 };
 

@@ -1,21 +1,29 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
+import useAuth from "../../hooks/useAuth";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
+  console.log(user);
   const links = (
     <>
-      <li>
-        <NavLink>Books</NavLink>
+      <li className="md:text-xl font-semibold">
+        <NavLink to="/">Books</NavLink>
       </li>
-      <li>
-        <NavLink>About</NavLink>
+      <li className="md:text-xl font-semibold">
+        <NavLink to="/">About</NavLink>
       </li>
-      <li>
-        <NavLink>DashBoard</NavLink>
+      <li className="md:text-xl font-semibold">
+        <NavLink to="/">DashBoard</NavLink>
       </li>
     </>
   );
+
+  const handleSignOut = () => {
+    signOutUser();
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -50,8 +58,28 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Sign Out</a>
+      <div className="navbar-end flex items-center gap-2">
+        {user ? (
+          <>
+            <img src={user?.photoURL} className="w-10 h-10 rounded-full" />
+            <a onClick={handleSignOut} className="btn">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <>
+            <Link to="/auth/login">
+              <button className=" btn btn-xs md:btn-md btn-primary">
+                Login
+              </button>
+            </Link>
+            <Link to="/auth/register">
+              <button className="btn btn-xs md:btn-md btn-primary">
+                Register
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
