@@ -1,14 +1,25 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const SocialLogin = () => {
   const navigate = useNavigate();
   const { signInWithGoogle } = useAuth();
+  const axiosGeneral = useAxios();
 
   const handleSocialLogin = () => {
-    signInWithGoogle().then(() => {
-      navigate("/");
+    signInWithGoogle().then((res) => {
+      const userInfo = {
+        displayName: res.user.displayName,
+        photoURL: res.user.photoURL,
+        email: res.user.email,
+      };
+      if (res.user) {
+        axiosGeneral.post("/users", userInfo).then(() => {
+          navigate("/");
+        });
+      }
     });
   };
   return (

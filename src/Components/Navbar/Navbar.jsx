@@ -6,7 +6,7 @@ import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-  console.log(user);
+  // console.log(user);
   const links = (
     <>
       <li className="md:text-xl font-semibold">
@@ -16,7 +16,7 @@ const Navbar = () => {
         <NavLink to="/">About</NavLink>
       </li>
       <li className="md:text-xl font-semibold">
-        <NavLink to="/">DashBoard</NavLink>
+        <NavLink to="/dashboard">DashBoard</NavLink>
       </li>
     </>
   );
@@ -61,7 +61,7 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-2">
         {user ? (
           <>
-            <img src={user?.photoURL} className="w-10 h-10 rounded-full" />
+            <img src={user.photoURL} className="w-10 h-10 rounded-full" />
             <a onClick={handleSignOut} className="btn">
               Sign Out
             </a>
