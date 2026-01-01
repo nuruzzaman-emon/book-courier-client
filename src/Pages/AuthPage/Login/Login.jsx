@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
@@ -6,10 +6,11 @@ import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import Loading from "../../../Components/Loading/Loading";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(location);
-  const { signInUser, loading } = useAuth();
+  const { signInUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -17,10 +18,15 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log(data);
-    signInUser(data.email, data.password).then(() => {
-      navigate(location.state || "/");
-    });
+    setLoading(true);
+    signInUser(data.email, data.password)
+      .then(() => {
+        navigate(location.state || "/");
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   if (loading) {

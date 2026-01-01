@@ -6,7 +6,7 @@ import { Link, Outlet } from "react-router";
 const LibrarianDashboard = () => {
   return (
     <div>
-      <h2 className="text-5xl text-primary font-bold my-12">
+      <h2 className="text-5xl text-primary font-bold my-12 text-center">
         Librarian DashBoard
       </h2>
       <div className="drawer lg:drawer-open">
@@ -119,3 +119,11 @@ const LibrarianDashboard = () => {
 };
 
 export default LibrarianDashboard;
+// export default function Libra() {
+//   return (
+//     <div>
+//       <h1>Dashboard</h1>
+//       {/* <Outlet></Outlet> */}
+//     </div>
+//   );
+// }

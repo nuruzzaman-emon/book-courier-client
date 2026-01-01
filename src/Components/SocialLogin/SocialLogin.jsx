@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import useAxios from "../../hooks/useAxios";
 
 const SocialLogin = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { signInWithGoogle } = useAuth();
   const axiosGeneral = useAxios();
 
   const handleSocialLogin = () => {
-    signInWithGoogle().then((res) => {
-      const userInfo = {
-        displayName: res.user.displayName,
-        photoURL: res.user.photoURL,
-        email: res.user.email,
-      };
-      if (res.user) {
-        axiosGeneral.post("/users", userInfo).then(() => {
-          navigate("/");
-        });
-      }
-    });
+    setLoading(true);
+    signInWithGoogle()
+      .then((res) => {
+        const userInfo = {
+          displayName: res.user.displayName,
+          photoURL: res.user.photoURL,
+          email: res.user.email,
+        };
+        if (res.user) {
+          axiosGeneral.post("/users", userInfo).then(() => {
+            navigate("/");
+            setLoading(false);
+          });
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
   return (
     <div>

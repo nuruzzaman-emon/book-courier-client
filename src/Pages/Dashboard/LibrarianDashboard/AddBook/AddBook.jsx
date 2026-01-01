@@ -24,36 +24,41 @@ const AddBook = () => {
     const Img_Api_Url = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_img_host_key
     }`;
-    axios.post(Img_Api_Url, formData).then((res) => {
-      const bookPhotoURL = res.data.data.url;
-      const bookInfo = {
-        authorName: data.authorName,
-        authorEmail: data.authorEmail,
-        authorPhoneNumber: data.authorPhoneNumber,
-        bookName: data.bookName,
-        bookPhotoURL: bookPhotoURL,
-        address: data.address,
-        status: data.status,
-        price: data.price,
-        description: data.description,
-      };
-      axiosSecure.post("/books", bookInfo).then((res) => {
-        if (res.data.insertedId) {
-          navigate("/dashboard/my-books");
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your Book Has Been Added",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
+    axios
+      .post(Img_Api_Url, formData)
+      .then((res) => {
+        const bookPhotoURL = res.data.data.url;
+        const bookInfo = {
+          authorName: data.authorName,
+          authorEmail: data.authorEmail,
+          authorPhoneNumber: data.authorPhoneNumber,
+          bookName: data.bookName,
+          bookPhotoURL: bookPhotoURL,
+          address: data.address,
+          status: data.status,
+          price: data.price,
+          description: data.description,
+        };
+        axiosSecure.post("/books", bookInfo).then((res) => {
+          if (res.data.insertedId) {
+            navigate("/dashboard/my-books");
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Your Book Has Been Added",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
   };
   return (
     <div>
-      <h2 className="text-4xl font-bold text-primary my-6">Add a new book </h2>
+      <h2 className="text-4xl font-bold text-primary my-6 text-center">Add a new book </h2>
       <div className="card-body max-w-3xl mx-auto">
         <form onSubmit={handleSubmit(handleAddBook)}>
           <fieldset className="fieldset grid grid-cols-1 gap-10 md:grid-cols-2 text-left">
@@ -103,7 +108,6 @@ const AddBook = () => {
                 {...register("authorPhoneNumber", {
                   required: true,
                   min: 11,
-                  max: 11,
                 })}
               />
               {errors.authorPhoneNumber && (

@@ -18,6 +18,7 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import AllUsers from "../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import ManageBooks from "../Pages/Dashboard/AdminDashboard/ManageBooks/ManageBooks";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import BookDetails from "../Components/BookDetails/BookDetails";
 
 const Router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const Router = createBrowserRouter([
             <MyBooks></MyBooks>
           </LibrarianRoute>
         ),
+      },
+      {
+        path: "book-details/:id",
+        Component: BookDetails,
       },
       {
         path: "orders",

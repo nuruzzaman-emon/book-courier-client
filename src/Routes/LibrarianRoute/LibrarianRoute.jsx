@@ -7,8 +7,8 @@ import Forbidden from "../../Components/Forbidden/Forbidden";
 const LibrarianRoute = ({ children }) => {
   const { loading } = useAuth();
   const { role, roleLoading } = useRole();
-  if ((loading, roleLoading)) {
-    return <Loading></Loading>;
+  if (loading || roleLoading) {
+    return ;
   }
   if (!role === "librarian") {
     return <Forbidden></Forbidden>;
