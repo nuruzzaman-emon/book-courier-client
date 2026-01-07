@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../Loading/Loading";
 
 const SocialLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -29,14 +30,12 @@ const SocialLogin = () => {
         setLoading(false);
       });
   };
+
   return (
-    <div>
-      <p>--------or--------</p>
+    <div className="flex flex-col justify-center items-center ">
+      <p className="my-2">--------or--------</p>
       {/* Google */}
-      <button
-        onClick={handleSocialLogin}
-        className="btn bg-white text-black border-[#e5e5e5]"
-      >
+      <button onClick={handleSocialLogin} className="btn bg-white text-black">
         <svg
           aria-label="Google logo"
           width="16"

@@ -19,6 +19,9 @@ import AllUsers from "../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import ManageBooks from "../Pages/Dashboard/AdminDashboard/ManageBooks/ManageBooks";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import BookDetails from "../Components/BookDetails/BookDetails";
+import AllBooks from "../Pages/AllBooks/AllBooks";
+import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess/PaymentSuccess";
+import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancel/PaymentCancel";
 
 const Router = createBrowserRouter([
   {
@@ -28,6 +31,10 @@ const Router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "all-books",
+        Component: AllBooks,
       },
     ],
   },
@@ -108,6 +115,14 @@ const Router = createBrowserRouter([
             <ManageBooks></ManageBooks>
           </AdminRoute>
         ),
+      },
+      {
+        path: "payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "payment-cancelled",
+        Component: PaymentCancelled,
       },
     ],
   },

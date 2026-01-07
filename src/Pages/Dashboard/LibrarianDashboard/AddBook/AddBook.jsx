@@ -1,12 +1,15 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { IoBookSharp } from "react-icons/io5";
+import Loading from "../../../../Components/Loading/Loading";
 
 const AddBook = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -17,6 +20,7 @@ const AddBook = () => {
   } = useForm();
 
   const handleAddBook = (data) => {
+    setLoading(true);
     const bookImg = data.bookPhoto[0];
     const formData = new FormData();
     formData.append("image", bookImg);
@@ -49,16 +53,25 @@ const AddBook = () => {
               showConfirmButton: false,
               timer: 2000,
             });
+            setLoading(false);
           }
         });
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div>
-      <h2 className="text-4xl font-bold text-primary my-6 text-center">Add a new book </h2>
+      <h2 className="text-4xl font-bold text-primary my-6 text-center">
+        Add a new book{" "}
+      </h2>
       <div className="card-body max-w-3xl mx-auto">
         <form onSubmit={handleSubmit(handleAddBook)}>
           <fieldset className="fieldset grid grid-cols-1 gap-10 md:grid-cols-2 text-left">
@@ -199,7 +212,7 @@ const AddBook = () => {
                 Book Description
               </label>
               <textarea
-                className="textarea h-30"
+                className="textarea h-30 w-full"
                 placeholder="Write about your book"
                 {...register("description", { required: true })}
               ></textarea>
@@ -209,12 +222,12 @@ const AddBook = () => {
                 </p>
               )}
             </div>
-            <input
-              type="submit"
-              value="Add Book"
-              className="btn btn-primary max-w-md"
-            />
           </fieldset>
+          <input
+            type="submit"
+            value="Add Book"
+            className="btn btn-primary max-w-md mt-2"
+          />
         </form>
       </div>
     </div>

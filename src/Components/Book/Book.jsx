@@ -26,8 +26,8 @@ const Book = ({ book }) => {
 
 const StyledWrapper = styled.div`
   .card {
-    width: 340px;
-    height: 340px;
+    max-width: 380px;
+    height: 380px;
     background: #243137;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
@@ -38,7 +38,7 @@ const StyledWrapper = styled.div`
   }
 
   .card:hover {
-    transform: scale(1);
+    transform: scale(.90);
     border-radius: 15px;
   }
 

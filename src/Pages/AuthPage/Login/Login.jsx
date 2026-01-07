@@ -24,8 +24,9 @@ const Login = () => {
         navigate(location.state || "/");
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setLoading(false);
+        console.log(console.log(err));
       });
   };
 
@@ -34,8 +35,10 @@ const Login = () => {
   }
 
   return (
-    <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
-      <h1 className="text-5xl font-bold text-secondary">Login now!</h1>
+    <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl p-10">
+      <h1 className="text-5xl  font-bold text-secondary text-center">
+        Login now!
+      </h1>
       <div className="card-body">
         <form onSubmit={handleSubmit(handleLogin)}>
           <fieldset className="fieldset">
@@ -88,8 +91,8 @@ const Login = () => {
             <span className="text-secondary text-xl font-bold">Register</span>
           </Link>
         </p>
+        <SocialLogin></SocialLogin>
       </div>
-      <SocialLogin></SocialLogin>
     </div>
   );
 };

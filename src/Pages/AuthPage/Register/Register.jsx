@@ -79,9 +79,9 @@ const Register = () => {
   }
 
   return (
-    <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
-      <h1 className="text-5xl font-bold text-secondary">Register now!</h1>
-      <div className="card-body">
+    <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl p-10">
+      <h1 className="text-5xl font-bold text-secondary text-center">Register now!</h1>
+      <div className="card-body p-10">
         <form onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset">
             {/* name */}
@@ -90,7 +90,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              className="input mb-3"
+              className="input mb-3 w-full"
               placeholder="Your Name"
               {...register("name", { required: true })}
             />
@@ -103,7 +103,7 @@ const Register = () => {
             </label>
             <input
               type="file"
-              className="file-input"
+              className="file-input w-full"
               {...register("photo", { required: true })}
             />
             {errors.photo?.type === "required" && (
@@ -115,7 +115,7 @@ const Register = () => {
             </label>
             <input
               type="email"
-              className="input my-3"
+              className="input my-3 w-full"
               placeholder="Email"
               {...register("email", { required: true })}
             />
@@ -128,7 +128,7 @@ const Register = () => {
             </label>
             <input
               type="password"
-              className="input"
+              className="input w-full"
               placeholder="Password"
               {...register("password", {
                 required: true,
@@ -137,9 +137,7 @@ const Register = () => {
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
               })}
             />
-            {errors.password?.type === "required" && (
-              <p className="text-red-500 font-semibold">Password is required</p>
-            )}
+
             {errors.password && (
               <p className="text-red-500 font-semibold">
                 Password should be one uppercase, one lowercase, one special
@@ -158,8 +156,8 @@ const Register = () => {
             <span className="text-secondary text-xl font-bold"> Login</span>
           </Link>
         </p>
-      </div>
       <SocialLogin></SocialLogin>
+      </div>
     </div>
   );
 };

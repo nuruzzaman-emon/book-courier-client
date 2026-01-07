@@ -10,13 +10,13 @@ const Navbar = () => {
   const links = (
     <>
       <li className="md:text-xl font-semibold">
-        <NavLink to="/">Books</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li className="md:text-xl font-semibold">
-        <NavLink to="/">About</NavLink>
+        <NavLink to="/all-books">All Books</NavLink>
       </li>
       <li className="md:text-xl font-semibold">
-        <NavLink to="/dashboard">DashBoard</NavLink>
+        <NavLink to="/dashboard/my-profile">DashBoard</NavLink>
       </li>
     </>
   );
@@ -62,7 +62,7 @@ const Navbar = () => {
         {user ? (
           <>
             <img src={user.photoURL} className="w-10 h-10 rounded-full" />
-            <a onClick={handleSignOut} className="btn">
+            <a onClick={handleSignOut} className="btn btn-primary">
               Sign Out
             </a>
           </>

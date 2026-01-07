@@ -16,6 +16,7 @@
   font-style: normal;
 }
 
-/* a.active {
+a.active {
   color: tomato;
-} */
+  text-decoration: underline;
+}
