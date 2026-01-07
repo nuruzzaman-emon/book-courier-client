@@ -67,11 +67,11 @@ const ManageBooks = () => {
   return (
     <div className="p-6 bg-base-100 rounded-2xl shadow-xl">
       {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-2 md:gap-0">
-        <h2 className="text-3xl sm:text-4xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+      <div className="text-center mb-10">
+        <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Books Management
         </h2>
-        <span className="badge badge-primary badge-lg">
+        <span className="badge badge-primary badge-lg mt-3">
           Total: {books.length}
         </span>
       </div>

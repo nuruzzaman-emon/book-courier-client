@@ -42,7 +42,7 @@ const AllUsers = () => {
     <div className="min-h-screen bg-base-200 py-10">
       {/* Page Title */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           All Registered Members
         </h2>
         <p className="mt-2 text-gray-500">

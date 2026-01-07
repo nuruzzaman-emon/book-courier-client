@@ -17,6 +17,10 @@
 }
 
 a.active {
-  color: tomato;
+  background: linear-gradient(to right, #4ade80, #6366f1); /* Tailwind primary to secondary */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: underline;
+  font-weight: bold;
 }
+
