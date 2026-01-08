@@ -26,12 +26,20 @@ const Banner = ({ books }) => {
         }}
         coverflowEffect={{
           rotate: 45,
-          stretch: 0,
+          stretch: 50,
           depth: 300,
           modifier: 1,
           slideShadows: true,
         }}
         pagination={true}
+        breakpoints={{
+          640: {
+            slidesPerView: 2, // medium screens
+          },
+          1024: {
+            slidesPerView: 3, // large screens
+          },
+        }}
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper"
       >

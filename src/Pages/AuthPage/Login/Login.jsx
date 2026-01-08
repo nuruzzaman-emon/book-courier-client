@@ -7,6 +7,7 @@ import Loading from "../../../Components/Loading/Loading";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(location);
@@ -26,7 +27,7 @@ const Login = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(console.log(err));
+        setErr(err.message);
       });
   };
 
@@ -85,6 +86,7 @@ const Login = () => {
             <button className="btn btn-primary mt-4">Login</button>
           </fieldset>
         </form>
+        {err && <p className="text-red-500">{err}</p>}
         <p>
           Didn't have an account?
           <Link state={location.state} to="/auth/register">

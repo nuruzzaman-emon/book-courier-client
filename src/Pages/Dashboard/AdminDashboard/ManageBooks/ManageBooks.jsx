@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../Components/Loading/Loading";
 import Swal from "sweetalert2";
 import { FaTrashAlt, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
 
 const ManageBooks = () => {
+  const [filteredItems, setFilteredItems] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const { register, handleSubmit } = useForm();
   const {
     data: books = [],
     isLoading,
@@ -14,10 +17,19 @@ const ManageBooks = () => {
   } = useQuery({
     queryKey: ["books"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-books");
+      const res = await axiosSecure.get("/all-books-admin");
       return res.data;
     },
   });
+  const displayBooks = filteredItems ?? books;
+
+  const handleSearch = (searchData) => {
+    axiosSecure
+      .get(`/all-books-admin?search=${searchData.search}`)
+      .then((res) => {
+        return setFilteredItems(res.data);
+      });
+  };
 
   const handleUpdateStatus = async (book, newStatus) => {
     const res = await axiosSecure.patch(
@@ -65,19 +77,53 @@ const ManageBooks = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-6 bg-base-100 rounded-2xl shadow-xl">
+    <div className="p-6 bg-base-100 rounded-2xl shadow-xl min-h-screen">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Books Management
         </h2>
         <span className="badge badge-primary badge-lg mt-3">
-          Total: {books.length}
+          Total: {displayBooks.length}
         </span>
       </div>
-
+      <div className="flex justify-center my-8 ">
+        <form onSubmit={handleSubmit(handleSearch)}>
+          <fieldset className="flex items-center">
+            <label
+              className="input rounded-l-4xl
+  bg-linear-to-r from-primary/10 to-secondary/10
+  border border-primary
+"
+            >
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                placeholder="Search"
+                {...register("search", { required: true })}
+              />
+            </label>
+            <button className="btn btn-primary font-bold">Search</button>
+          </fieldset>
+        </form>
+      </div>
       {/* Responsive Table Container */}
-      <div className="overflow-x-auto max-w-6xl mx-auto rounded-xl shadow-2xl">
+      <div className="overflow-x-auto max-w-6xl mx-auto  rounded-xl shadow-2xl">
         <table className="table table-zebra w-full ">
           <thead className="bg-base-200 sticky top-0 z-10">
             <tr className="text-base font-semibold">
@@ -90,12 +136,12 @@ const ManageBooks = () => {
           </thead>
 
           <tbody>
-            {books.map((book, index) => (
+            {displayBooks.map((book, index) => (
               <tr key={book._id} className="hover:bg-base-200 transition-all">
                 <th>{index + 1}</th>
 
                 {/* Book Info */}
-                <td className="min-w-[250px]">
+                <td className="min-w-62.5">
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12 shadow">
@@ -157,6 +203,7 @@ const ManageBooks = () => {
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 };

@@ -34,38 +34,45 @@ const AllBooks = () => {
 
   return (
     <div className="w-11/12 mx-auto">
-      <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent my-10 text-center">
+      <h2 className="text-3xl md:text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent my-10 text-center">
         Discover Your Favorite Books
       </h2>
       <div className="flex justify-center my-8 ">
         <form onSubmit={handleSubmit(handleSearch)}>
-          <label className="input input-bordered border-primary">
-            <svg
-              className="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+          <fieldset className="flex items-center">
+            <label
+              className="input rounded-l-4xl
+  bg-linear-to-r from-primary/10 to-secondary/10
+  border border-primary
+"
             >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
               >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              type="search"
-              placeholder="Search"
-              {...register("search", { required: true })}
-            />
-          </label>
-          <button className="btn btn-primary btn-xs">Search</button>
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                placeholder="Search"
+                {...register("search", { required: true })}
+              />
+            </label>
+            <button className="btn btn-primary font-bold">Search</button>
+          </fieldset>
         </form>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-8">
         {allItems.map((book) => (
           <Book key={book._id} book={book}></Book>
         ))}

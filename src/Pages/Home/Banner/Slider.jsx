@@ -5,7 +5,7 @@ const Slider = ({ book }) => {
   return (
     <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden w-full h-82 flex flex-col md:flex-row">
       {/* Book Image */}
-      <div className="md:w-1/2 h-48 md:h-auto">
+      <div className="md:w-1/2 h-32 md:h-auto">
         <img
           src={book.bookPhotoURL}
           alt={book.bookName}

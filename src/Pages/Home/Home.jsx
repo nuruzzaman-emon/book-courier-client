@@ -11,7 +11,7 @@ const Home = () => {
   const { data: books = [], isLoading: dataLoading } = useQuery({
     queryKey: ["all-books"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/all-books?limit=6`);
+      const res = await axiosSecure.get(`/all-books?limit=8`);
       return res.data;
     },
   });

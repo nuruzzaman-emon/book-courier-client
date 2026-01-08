@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
@@ -39,7 +40,7 @@ const AdminDashboard = () => {
             <div className="px-4 text-2xl font-bold">Admin Panel</div>
           </nav>
           {/* Page content here */}
-          <div className="p-4 bg-white">
+          <div className="p-4 bg-white ">
             <Outlet></Outlet>
           </div>
         </div>
@@ -58,23 +59,11 @@ const AdminDashboard = () => {
                 <Link
                   to="/"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
+                  data-tip="Home"
                 >
                   {/* Home icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-4"
-                  >
-                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  </svg>
-                  <span className="is-drawer-close:hidden">Homepage</span>
+                  <AiOutlineHome size={20} />
+                  <span className="is-drawer-close:hidden">Home</span>
                 </Link>
               </li>
               {/* All Users */}
@@ -85,7 +74,7 @@ const AdminDashboard = () => {
                   data-tip="All Users"
                 >
                   {/* users icon */}
-                  <FaUsers></FaUsers>
+                  <FaUsers size={20}></FaUsers>
                   <span className="is-drawer-close:hidden mx-1">
                     {" "}
                     All Users
@@ -99,7 +88,7 @@ const AdminDashboard = () => {
                   data-tip="Manage Books"
                 >
                   {/* manage icon */}
-                  <SiNginxproxymanager />
+                  <SiNginxproxymanager size={20} />
                   <span className="is-drawer-close:hidden mx-1">
                     {" "}
                     Manage Books
@@ -113,7 +102,7 @@ const AdminDashboard = () => {
                   data-tip="All Users"
                 >
                   {/* Profile icon */}
-                  <CgProfile />
+                  <CgProfile size={20} />
                   <span className="is-drawer-close:hidden mx-1">
                     {" "}
                     My Profile

@@ -14,7 +14,7 @@ const MyBooks = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/books?email=${user?.email}&status=published`
+        `/books-library?email=${user?.email}`
       );
       return res.data;
     },

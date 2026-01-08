@@ -63,11 +63,11 @@ const Orders = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
-        <h2 className="text-4xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+      <div className="mb-8 flex flex-col items-center justify-center">
+        <h2 className="text-4xl  font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Orders Management
         </h2>
-        <span className="badge badge-lg badge-primary">
+        <span className="badge badge-lg badge-primary my-2">
           Total: {orders.length}
         </span>
       </div>
