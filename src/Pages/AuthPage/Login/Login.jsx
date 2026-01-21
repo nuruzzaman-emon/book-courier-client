@@ -4,10 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import Loading from "../../../Components/Loading/Loading";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(location);
@@ -26,8 +26,14 @@ const Login = () => {
         setLoading(false);
       })
       .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
         setLoading(false);
-        setErr(err.message);
       });
   };
 
@@ -86,7 +92,6 @@ const Login = () => {
             <button className="btn btn-primary mt-4">Login</button>
           </fieldset>
         </form>
-        {err && <p className="text-red-500">{err}</p>}
         <p>
           Didn't have an account?
           <Link state={location.state} to="/auth/register">

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
 import useAuth from "../../hooks/useAuth";
+import { motion } from "motion/react";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -70,24 +71,49 @@ const Navbar = () => {
               alt="User"
               className="w-10 h-10 rounded-full ring-2 ring-primary"
             />
-            <button
+            <motion.button
+              whileHover={{
+                rotateX: 20,
+                rotateY: 15,
+                boxShadow: "1px 3px 4px 1px 10px",
+              }}
+              style={{ transform: "translateZ(100px)" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               onClick={handleSignOut}
-              className="btn btn-primary hover:bg-secondary transition-colors duration-300"
+              className="btn btn-primary hover:bg-secondary  duration-200"
             >
               Sign Out
-            </button>
+            </motion.button>
           </>
         ) : (
           <>
             <Link to="/auth/login">
-              <button className="btn btn-primary hover:bg-secondary transition-colors duration-300">
+              <motion.span
+                whileHover={{
+                  rotateX: 20,
+                  rotateY: 15,
+                  boxShadow: "1px 3px 4px 1px 10px",
+                }}
+                style={{ transform: "translateZ(100px)" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="btn btn-primary hover:bg-secondary transition-colors duration-300"
+              >
                 Login
-              </button>
+              </motion.span>
             </Link>
             <Link to="/auth/register">
-              <button className="btn btn-outline btn-primary hover:bg-primary hover:text-white transition-colors duration-300">
+              <motion.span
+                whileHover={{
+                  rotateX: 20,
+                  rotateY: 15,
+                  boxShadow: "1px 3px 4px 1px 10px",
+                }}
+                style={{ transform: "translateZ(100px)" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="btn btn-outline btn-primary hover:bg-primary hover:text-white transition-colors duration-300"
+              >
                 Register
-              </button>
+              </motion.span>
             </Link>
           </>
         )}

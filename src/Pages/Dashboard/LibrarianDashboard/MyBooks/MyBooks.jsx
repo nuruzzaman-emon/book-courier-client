@@ -13,9 +13,7 @@ const MyBooks = () => {
     queryKey: ["my-books", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/books-library?email=${user?.email}`
-      );
+      const res = await axiosSecure.get(`/books-library?email=${user?.email}`);
       return res.data;
     },
   });
@@ -26,8 +24,12 @@ const MyBooks = () => {
 
   return (
     <div>
-      <h2 className="text-4xl font-bold text-primary my-6 text-center">
-        Your all books are here 
+      <h2
+        className="text-3xl md:text-5xl font-bold 
+          bg-linear-to-r from-primary to-secondary 
+          bg-clip-text text-transparent text-center"
+      >
+        Your all books are here
       </h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra max-w-4xl mx-auto">
@@ -50,12 +52,19 @@ const MyBooks = () => {
                   </div>
                 </td>
                 <td>
-                  <Link to={`/dashboard/book-details/${book._id}`}>
-                    {book.bookName}
+                  <Link to={`/book-details/${book._id}`}>
+                    <span className="text-secondary font-bold hover:underline">
+                      {book.bookName}
+                    </span>
                   </Link>
                 </td>
                 <td>
-                  <button className="btn btn-primary">Edit</button>
+                  <Link
+                    to={`/dashboard/edit-book/${book?._id}`}
+                    className="btn btn-primary"
+                  >
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

@@ -64,7 +64,11 @@ const Orders = () => {
     <div className="p-6">
       {/* Header */}
       <div className="mb-8 flex flex-col items-center justify-center">
-        <h2 className="text-4xl  font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <h2
+          className="text-3xl md:text-5xl font-bold 
+          bg-linear-to-r from-primary to-secondary 
+          bg-clip-text text-transparent text-center my-3"
+        >
           Orders Management
         </h2>
         <span className="badge badge-lg badge-primary my-2">

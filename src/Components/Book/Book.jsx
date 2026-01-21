@@ -1,11 +1,24 @@
 import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
+import { motion } from "motion/react";
 
-const Book = ({ book }) => {
+const Book = ({ book, delay = 0 }) => {
+  const cardVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0 },
+  };
   return (
     <StyledWrapper>
-      <div className="card">
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        // whileHover={{ rotateY: [25, 0], transition: { duration: 0.2 } }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.2, delay }}
+        className="card"
+      >
         {/* First content: full image */}
         <div className="first-content">
           <img src={book?.bookPhotoURL} alt="" />
@@ -14,12 +27,12 @@ const Book = ({ book }) => {
         {/* Second content: overlay with title + button */}
         <div className="second-content">
           <h3>{book?.bookName}</h3>
-          <p>Published At: {new Date(book?.createdAt).toLocaleDateString()}</p>
-          <Link to={`/dashboard/book-details/${book?._id}`}>
+          <p>৳{book.price}</p>
+          <Link to={`/book-details/${book?._id}`}>
             <button className="btn my-3">View Details</button>
           </Link>
         </div>
-      </div>
+      </motion.div>
     </StyledWrapper>
   );
 };
@@ -37,11 +50,6 @@ const StyledWrapper = styled.div`
     cursor: pointer;
   }
 
-  .card:hover {
-    transform: scale(.90);
-    border-radius: 15px;
-  }
-
   /* First content: full image */
   .first-content {
     height: 100%;
@@ -52,7 +60,7 @@ const StyledWrapper = styled.div`
   .first-content img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: center;
   }
 
   /* Second content: overlay with title + button */
@@ -77,6 +85,11 @@ const StyledWrapper = styled.div`
   .second-content h3 {
     margin-bottom: 10px;
     font-size: 2rem;
+    font-weight: 600;
+  }
+  .second-content p {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
     font-weight: 600;
   }
 

@@ -104,7 +104,7 @@ const MyOrders = () => {
 
                     <td>
                       <Link
-                        to={`/dashboard/book-details/${order.bookId}`}
+                        to={`/book-details/${order.bookId}`}
                         className="font-semibold text-primary hover:underline flex items-center gap-2"
                       >
                         <FaBook />

@@ -1,7 +1,48 @@
 import React from "react";
+import { AiOutlineHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineFormatListNumbered, MdPayment } from "react-icons/md";
+import { PiListHeartFill } from "react-icons/pi";
 import { Link, Outlet } from "react-router";
+
+const menuItems = [
+  { to: "/", icon: <AiOutlineHome size={20} />, label: "Homepage" },
+  {
+    to: "/dashboard/my-orders",
+    icon: <MdOutlineFormatListNumbered size={20} />,
+    label: "My Orders",
+  },
+  {
+    to: "/dashboard/invoices",
+    icon: <MdPayment size={20} />,
+    label: "Invoices",
+  },
+  {
+    to: "/dashboard/wishlist",
+    icon: <PiListHeartFill size={20} />,
+    label: "Wishlist",
+  },
+  {
+    to: "/dashboard/my-profile",
+    icon: <CgProfile size={20} />,
+    label: "My Profile",
+  },
+];
+
+const ulVariants = {
+  "is-drawer-open": {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+  "is-drawer-close": {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 const UserDashboard = () => {
   return (
@@ -51,65 +92,20 @@ const UserDashboard = () => {
           ></label>
           <div className="flex min-h-full flex-col items-start  is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
-            <ul className="menu w-full grow">
-              {/* home page */}
-              <li>
-                <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Homepage">
-                  
+            <ul variants={ulVariants} className="menu w-full grow">
+              {menuItems.map((item, i) => (
+                <li key={i}>
+                  <Link
+                    to={item.to}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip={item.label}
+                  >
                     {/* Home icon */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      fill="none"
-                      stroke="currentColor"
-                      className="my-1.5 inline-block size-4"
-                    >
-                      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                      <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    </svg>
-                    <span className="is-drawer-close:hidden">Homepage</span>
-                  
-                </Link>
-              </li>
-              {/* my orders */}
-              <li>
-                <Link
-                  to="/dashboard/my-orders"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Orders"
-                >
-                  {/* orders icon */}
-                  <MdOutlineFormatListNumbered />
-                  <span className="is-drawer-close:hidden">My Orders</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/dashboard/invoices"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="invoices"
-                >
-                  {/* invoices icon */}
-                  <MdPayment />
-                  <span className="is-drawer-close:hidden">Invoices</span>
-                </Link>
-              </li>
-              {/* my profile */}
-              <li>
-                <Link
-                  to="/dashboard/my-profile"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Profile"
-                >
-                  {/* profile icon */}
-                  <CgProfile />
-                  <span className="is-drawer-close:hidden">My Profile</span>
-                </Link>
-              </li>
+                    {item.icon}
+                    <span className="is-drawer-close:hidden">{item.label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

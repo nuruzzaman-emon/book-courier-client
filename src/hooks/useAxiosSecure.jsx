@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://book-courier-server-theta.vercel.app",
 });
 
 import React, { useEffect } from "react";
@@ -18,7 +18,7 @@ const useAxiosSecure = () => {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
 
     //response interceptors
@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
     return () => {
       axiosSecure.interceptors.request.eject(reqInterceptor);

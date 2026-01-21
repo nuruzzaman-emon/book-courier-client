@@ -73,7 +73,7 @@ const MyProfile = () => {
           </div>
 
           <div className="text-center md:text-left">
-            <h2 className="text-3xl font-extrabold text-gray-800">
+            <h2 className="text-3xl font-extrabold capitalize text-gray-800">
               {user?.displayName}
             </h2>
             <p className="text-gray-500">{user?.email}</p>

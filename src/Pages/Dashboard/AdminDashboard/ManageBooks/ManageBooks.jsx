@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../Components/Loading/Loading";
 import Swal from "sweetalert2";
@@ -7,28 +7,26 @@ import { FaTrashAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 
 const ManageBooks = () => {
-  const [filteredItems, setFilteredItems] = useState(null);
+  const [searchText, setSearchText] = useState("");
   const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const {
     data: books = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["books"],
+    queryKey: ["books", searchText],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-books-admin");
+      const res = await axiosSecure.get(
+        `/all-books-admin?searchText=${searchText}`
+      );
       return res.data;
     },
   });
-  const displayBooks = filteredItems ?? books;
 
-  const handleSearch = (searchData) => {
-    axiosSecure
-      .get(`/all-books-admin?search=${searchData.search}`)
-      .then((res) => {
-        return setFilteredItems(res.data);
-      });
+  const handleSearch = (data) => {
+    setSearchText(data.search);
+    reset();
   };
 
   const handleUpdateStatus = async (book, newStatus) => {
@@ -84,7 +82,7 @@ const ManageBooks = () => {
           Books Management
         </h2>
         <span className="badge badge-primary badge-lg mt-3">
-          Total: {displayBooks.length}
+          Total: {books.length}
         </span>
       </div>
       <div className="flex justify-center my-8 ">
@@ -136,7 +134,7 @@ const ManageBooks = () => {
           </thead>
 
           <tbody>
-            {displayBooks.map((book, index) => (
+            {books.map((book, index) => (
               <tr key={book._id} className="hover:bg-base-200 transition-all">
                 <th>{index + 1}</th>
 
@@ -203,7 +201,6 @@ const ManageBooks = () => {
           </tbody>
         </table>
       </div>
-      
     </div>
   );
 };

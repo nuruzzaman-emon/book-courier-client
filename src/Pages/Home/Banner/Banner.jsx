@@ -12,7 +12,7 @@ import Slider from "./Slider";
 
 const Banner = ({ books }) => {
   return (
-    <div className="p-4">
+    <div className="md:p-6">
       <Swiper
         loop={true}
         spaceBetween={20}

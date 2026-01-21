@@ -22,11 +22,17 @@ import BookDetails from "../Components/BookDetails/BookDetails";
 import AllBooks from "../Pages/AllBooks/AllBooks";
 import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess/PaymentSuccess";
 import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancel/PaymentCancel";
+import WishList from "../Pages/Dashboard/UserDashboard/WishList/WishList";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
+import AuthError from "../Components/ErrorPage/AuthError/AuthError";
+import DashboardError from "../Components/ErrorPage/DashboardError/DashboardError";
+import BookEdited from "../Components/BookEdited/BookEdited";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -36,11 +42,24 @@ const Router = createBrowserRouter([
         path: "all-books",
         Component: AllBooks,
       },
+      {
+        path: "book-details/:id",
+        element: (
+          <PrivateRoute>
+            <BookDetails></BookDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
     ],
   },
   {
     path: "auth",
     Component: AuthLayout,
+    errorElement: <AuthError />,
     children: [
       {
         path: "register",
@@ -49,6 +68,10 @@ const Router = createBrowserRouter([
       {
         path: "login",
         Component: Login,
+      },
+      {
+        path: "*",
+        Component: AuthError,
       },
     ],
   },
@@ -59,6 +82,7 @@ const Router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
+    errorElement: <DashboardError />,
     children: [
       {
         path: "my-profile",
@@ -89,8 +113,12 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "book-details/:id",
-        Component: BookDetails,
+        path: "edit-book/:id",
+        element: (
+          <LibrarianRoute>
+            <BookEdited></BookEdited>
+          </LibrarianRoute>
+        ),
       },
       {
         path: "orders",
@@ -123,6 +151,14 @@ const Router = createBrowserRouter([
       {
         path: "payment-cancelled",
         Component: PaymentCancelled,
+      },
+      {
+        path: "wishlist",
+        Component: WishList,
+      },
+      {
+        path: "*",
+        Component: DashboardError,
       },
     ],
   },

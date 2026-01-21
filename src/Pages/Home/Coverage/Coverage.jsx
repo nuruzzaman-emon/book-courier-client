@@ -11,7 +11,7 @@ const Coverage = ({ mapData }) => {
     e.preventDefault();
     const location = e.target.location.value.toLowerCase();
     const district = mapData.find((center) =>
-      center.district.toLowerCase().includes(location)
+      center.district.toLowerCase().includes(location),
     );
 
     if (!district) {
@@ -35,7 +35,7 @@ const Coverage = ({ mapData }) => {
   };
 
   return (
-    <div>
+    <div className="rounded-2xl shadow-2xl">
       {/* HEADER SECTION */}
       <div className="mt-20 text-center">
         <h2
@@ -46,14 +46,14 @@ const Coverage = ({ mapData }) => {
           Meet All Our Libraries
         </h2>
 
-        <p className="mt-4 text-gray-500 md:text-lg max-w-3xl mx-auto">
+        <p className="mt-2 text-neutral font-bold max-w-3xl mx-auto">
           Explore our library locations across different cities and discover the
           areas we proudly serve through our nationwide network.
         </p>
       </div>
 
       {/* SEARCH BAR */}
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center my-8">
         <form onSubmit={handleSearch}>
           <fieldset className="flex items-center gap-0">
             <div>
@@ -104,11 +104,11 @@ const Coverage = ({ mapData }) => {
       </div>
 
       {/* MAP */}
-      <div className="w-11/12 mx-auto h-200 md:h-[500px]">
+      <div className=" h-200 md:h-125">
         <MapContainer
           ref={mapRef}
           center={position}
-          zoom={8}
+          zoom={7}
           scrollWheelZoom={false}
           className="h-full rounded-3xl shadow-xl border border-primary/20 overflow-hidden"
         >
@@ -117,7 +117,7 @@ const Coverage = ({ mapData }) => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {mapData.map((center, i) => (
+          {mapData?.map((center, i) => (
             <Marker key={i} position={[center.latitude, center.longitude]}>
               <Popup>
                 <h3 className="font-bold text-primary text-lg">

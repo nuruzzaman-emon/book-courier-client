@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://book-courier-server-theta.vercel.app",
 });
 
 import React from "react";
