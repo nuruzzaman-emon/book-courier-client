@@ -27,6 +27,7 @@ const MyOrders = () => {
       return res.data;
     },
   });
+  console.log(myOrders);
 
   if (isLoading) {
     return <Loading />;
@@ -41,7 +42,7 @@ const MyOrders = () => {
     };
     const res = await axiosSecure.post(
       "/payment-checkout-sessions",
-      paymentInfo
+      paymentInfo,
     );
     window.location.assign(res.data.url);
   };
@@ -64,7 +65,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div  className="min-h-screen bg-linear-to-br from-secondary to-green-900 p-6">
+    <div className="min-h-screen bg-linear-to-br from-secondary to-green-900 p-6">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-4xl font-extrabold text-white">

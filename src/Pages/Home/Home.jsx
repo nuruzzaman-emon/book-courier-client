@@ -8,6 +8,7 @@ import WhyFromUs from "../../Components/WhyFromUs/WhyFromUs";
 import AnimatedSection from "./AnimatedSection/AnimatedSection";
 import useAxios from "../../hooks/useAxios";
 import Process from "./Process/Process";
+import FAQ from "./FAQ/FAQ";
 
 const Home = () => {
   const axiosGeneral = useAxios();
@@ -46,6 +47,7 @@ const Home = () => {
       <WhyFromUs></WhyFromUs>
       <AnimatedSection allDataCount={allDataCount}></AnimatedSection>
       <Process></Process>
+      <FAQ></FAQ>
     </div>
   );
 };

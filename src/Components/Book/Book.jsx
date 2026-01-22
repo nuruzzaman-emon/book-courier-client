@@ -14,8 +14,7 @@ const Book = ({ book, delay = 0 }) => {
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
-        // whileHover={{ rotateY: [25, 0], transition: { duration: 0.2 } }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.2, delay }}
         className="card"
       >
