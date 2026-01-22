@@ -80,20 +80,35 @@ const BookDetails = () => {
       bookName: data.bookName,
       bookId: data._id,
       price: book.price,
-      userEmail: user?.email,
       bookPhotoURL: book.bookPhotoURL,
     };
-    axiosSecure.post("/user-wishlist", desiredBook).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: `${book.bookName} has been added on Wishlist`,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    });
+    axiosSecure
+      .post("/user-wishlist", desiredBook)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${book.bookName} has been added on Wishlist`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      })
+      .catch((err) => {
+        if (err.response?.status === 409) {
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            html: `<span class="text-red-500 font-semibold">${book.bookName} is already in wishlist</span>`,
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: {
+              popup: "bg-red-100 border border-red-500 p-4 rounded-lg",
+            },
+          });
+        }
+      });
   };
 
   const handleSubmitReview = (data) => {
