@@ -10,7 +10,7 @@ import Loading from "../../../../Components/Loading/Loading";
 const MyProfile = () => {
   const [loading, setLoading] = useState(false);
   const { user, updateUserProfile } = useAuth();
-  const { role } = useRole();
+  const { role, roleLoading } = useRole();
 
   const {
     register,
@@ -52,7 +52,7 @@ const MyProfile = () => {
     });
   };
 
-  if (loading) {
+  if (loading || roleLoading) {
     return <Loading></Loading>;
   }
 
@@ -98,9 +98,7 @@ const MyProfile = () => {
           >
             {/* Name Field */}
             <div className=" ">
-              <label className="label font-bold">
-                Full Name
-              </label>
+              <label className="label font-bold">Full Name</label>
               <input
                 type="text"
                 className="input input-bordered w-full border-gray-300 text-accent"
@@ -109,7 +107,6 @@ const MyProfile = () => {
               {errors.displayName && (
                 <p className="text-red-500 mt-1">Name is required</p>
               )}
-              
             </div>
             {/* Photo Upload */}
             <div className="form-control w-full">

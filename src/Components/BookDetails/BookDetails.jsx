@@ -8,14 +8,12 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import BookReview from "../BookReview/BookReview";
-import useRole from "../../hooks/useRole";
 
 const BookDetails = () => {
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
   const navigate = useNavigate();
   const orderRef = useRef(null);
   const { user } = useAuth();
-  const { role } = useRole();
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { data: book = {}, isLoading } = useQuery({
@@ -34,7 +32,7 @@ const BookDetails = () => {
       return res.data;
     },
   });
-
+  console.log(reviewPermission);
   const {
     register,
     handleSubmit,

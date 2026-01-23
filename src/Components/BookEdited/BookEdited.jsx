@@ -18,7 +18,11 @@ const BookEdited = () => {
   } = useForm();
 
   const { id } = useParams();
-  const { data: selectedBook, isLoading } = useQuery({
+  const {
+    data: selectedBook,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["selected-book", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/selected-book/${id}`);
@@ -63,6 +67,7 @@ const BookEdited = () => {
               timer: 2000,
             });
             setLoading(false);
+            refetch();
           }
         })
         .catch((err) => {

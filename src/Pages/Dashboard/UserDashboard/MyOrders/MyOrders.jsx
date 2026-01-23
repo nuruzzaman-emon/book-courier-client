@@ -27,7 +27,7 @@ const MyOrders = () => {
       return res.data;
     },
   });
-  console.log(myOrders);
+  // console.log(myOrders);
 
   if (isLoading) {
     return <Loading />;
