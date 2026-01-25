@@ -2,45 +2,90 @@
 
 A modern book delivery and management web application built with React and Vite.
 
+# live link
+
+- https://book-courier-c3864.web.app
+
 ## Features
 
-- User authentication
-- User authorization
+- User authentication and authorization
 - Browse and order books
-- Order tracking
-- Dashboard for users and admins
+- Order and  track books
+- Wish List functionality
+- Role based Dashboard (users,librarian and admins)
 
 ## Tech Stack
 
 - React
 - Vite
 - Tailwind CSS
-- axios
-- daisyui
-- react leaflet
-- lottie react
-- motion
-- react icon
-- styled component
-- sweetalert2
-- swiper
+- Axios
+- Daisyui
+- React leaflet
+- Lottie react
+- Motion
+- React icon
+- Styled component
+- Sweetalert2
+- Swiper
 - React Router
 - TanStack Query
 
 ## explaination
 
-# User role
+- Users can visit the Home page and All Books page without logging in.The All Books page includes a search option to find books by name.To access Book Details and the Dashboard, users must be logged in.
 
-- a user can access homepage, allbooks.but for dashboard and book user must be log in.An authenticated browse book and can add to his wishlist and order the book.after successfully paid user can review.in dashboard user has my order page where user can see all of his orders.Invoice page is for user payment history and here also has a page for user wishlist and a profile page named My Profile page
+## Authentication
 
-# Librarian role
+- New users must register using Name, Image, Email, and Password.After registration, the user role is set to User by default.Registered users can log in using their email and password.
 
-- A librarian must be an authenticated user and must be approved as a librarian by admin. In Librarian dashboard librarian can add book ,edit book but cannot delete,able to see how many book he added. librarian has a page for profile named my profile. In Orders page he can see how many of his book is ordered
+# a User can 
+
+- Access Home and All Books pages
+
+- View book details after logging in
+
+- Add books to wishlist
+
+- Order books and make payments
+
+- Submit reviews after successful payment
+## In User Dashboard 
+- My Orders
+
+- Invoice (payment history)
+
+- Wishlist
+
+- My Profile
+
+#  Librarian Role
+
+- A Librarian:Must be an authenticated user.Must be approved by an Admin
+
+## a Librarian can:
+
+- Add and edit books (cannot delete)
+
+- View how many books they have added
+
+- View orders for their books
+
+## Librarian Dashboard includes:
+- Add Book 
+
+- My Book 
+
+- Orders
+
+- My Profile
+
 
 # Admin role
+## An Admin can:
 
-- An admin can make a user librarian or an admin in All user page.Admin can publish an unpublished book and unpublish a published book.In here alse has a page named My profile
+- Assign roles (User → Librarian / Admin)
 
-# live link
+- Publish or unpublish books
 
-- https://book-courier-c3864.web.app
+- Manage all users
