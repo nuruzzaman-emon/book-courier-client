@@ -5,10 +5,10 @@ import { Link } from "react-router";
 const Logo = () => {
   return (
     <Link to="/">
-      <div className="flex items-center gap-3 p-3 md:p-4 rounded-xl bg-linear-to-r from-purple-500 to-pink-500 shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer">
+      <div className="btn btn-xs md:btn-md btn-primary px-3  py-3">
         {/* Animated book icon */}
-        <BiSolidBookOpen size={30} className="text-white animate-bounce" />
-        <h2 className="font-extrabold md:text-xl text-white tracking-wide drop-shadow-lg">
+        <BiSolidBookOpen className="text-white animate-pulse w-4 h-4 md:w-10 md:h-10" />
+        <h2 className="font-extrabold text-xs md:text-xl text-white tracking-wide drop-shadow-lg animate-pulse">
           Book Nest
         </h2>
       </div>

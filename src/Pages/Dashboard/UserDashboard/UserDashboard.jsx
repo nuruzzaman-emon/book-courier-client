@@ -29,32 +29,17 @@ const menuItems = [
   },
 ];
 
-const ulVariants = {
-  "is-drawer-open": {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-  "is-drawer-close": {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-};
-
 const UserDashboard = () => {
   return (
-    <div className="bg-[#30336b] py-12 text-white">
-      <h2 className="text-5xl text-white font-bold text-center">
+    <div className="bg-[#30336b] py-12">
+      <h2 className="text-5xl text-white font-bold  text-center">
         User DashBoard
       </h2>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content ">
           {/* Navbar */}
-          <nav className="navbar w-full">
+          <nav className="navbar w-full bg-[#30336b] text-white ">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
@@ -76,10 +61,10 @@ const UserDashboard = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4 text-2xl font-bold">User Panel</div>
+            <div className="px-4 text-2xl font-bold ">User Panel</div>
           </nav>
           {/* Page content here */}
-          <div className="p-4  min-h-screen">
+          <div className="p-4">
             <Outlet></Outlet>
           </div>
         </div>
@@ -90,17 +75,17 @@ const UserDashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="flex min-h-full flex-col items-start  is-drawer-close:w-14 is-drawer-open:w-64">
+          <div className="flex min-h-full flex-col items-start bg-[#30336b] text-white  is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
-            <ul variants={ulVariants} className="menu w-full grow">
-              {menuItems.map((item, i) => (
-                <li key={i}>
+            <ul className="menu w-full grow">
+              {menuItems.map((item) => (
+                <li>
                   <Link
-                    to={item.to}
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    to={`${item.to}`}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right "
                     data-tip={item.label}
                   >
-                    {/* Home icon */}
+                    {/* icon */}
                     {item.icon}
                     <span className="is-drawer-close:hidden">{item.label}</span>
                   </Link>

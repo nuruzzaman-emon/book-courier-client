@@ -4,6 +4,29 @@ import { CgProfile } from "react-icons/cg";
 import { FaBook, FaClipboardList } from "react-icons/fa";
 import { LuBookPlus } from "react-icons/lu";
 import { Link, Outlet } from "react-router";
+const menuItems = [
+  { to: "/", icon: <AiOutlineHome size={20} />, label: "Homepage" },
+  {
+    to: "/dashboard/add-book",
+    icon: <LuBookPlus size={20} />,
+    label: "Add Books",
+  },
+  {
+    to: "/dashboard/my-books",
+    icon: <FaBook size={20} />,
+    label: "My Books",
+  },
+  {
+    to: "/dashboard/orders",
+    icon: <FaClipboardList size={20} />,
+    label: "Orders",
+  },
+  {
+    to: "/dashboard/my-profile",
+    icon: <CgProfile size={20} />,
+    label: "My Profile",
+  },
+];
 
 const LibrarianDashboard = () => {
   return (
@@ -54,69 +77,19 @@ const LibrarianDashboard = () => {
           <div className="flex min-h-full flex-col items-start bg-[#30336b] is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
             <ul className="menu w-full grow text-white">
-              {/* home page */}
-              <li>
-                <Link
-                  to="/"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Home"
-                >
-                  {/* Home icon */}
-                  <AiOutlineHome size={16} />
-                  <span className="is-drawer-close:hidden font-bold">Home</span>
-                </Link>
-              </li>
-              {/* Add Book */}
-              <li>
-                <Link
-                  to={"/dashboard/add-book"}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Add Book"
-                >
-                  <LuBookPlus />
-                  <span className="is-drawer-close:hidden font-bold">
-                    Add Book
-                  </span>
-                </Link>
-              </li>
-              {/* my books */}
-              <li>
-                <Link
-                  to={"/dashboard/my-books"}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Books"
-                >
-                  <FaBook />
-                  <span className="is-drawer-close:hidden font-bold">
-                    My Books
-                  </span>
-                </Link>
-              </li>
-              {/* orders */}
-              <li>
-                <Link
-                  to={"/dashboard/orders"}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Orders"
-                >
-                  <FaClipboardList />
-                  <span className="is-drawer-close:hidden font-bold">
-                    Orders
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/dashboard/my-profile"}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Profile"
-                >
-                  <CgProfile />
-                  <span className="is-drawer-close:hidden font-bold">
-                    My Profile
-                  </span>
-                </Link>
-              </li>
+              {menuItems.map((item) => (
+                <li>
+                  <Link
+                    to={`${item.to}`}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right "
+                    data-tip={item.label}
+                  >
+                    {/* icon */}
+                    {item.icon}
+                    <span className="is-drawer-close:hidden">{item.label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -126,11 +99,4 @@ const LibrarianDashboard = () => {
 };
 
 export default LibrarianDashboard;
-// export default function Libra() {
-//   return (
-//     <div>
-//       <h1>Dashboard</h1>
-//       {/* <Outlet></Outlet> */}
-//     </div>
-//   );
-// }
+

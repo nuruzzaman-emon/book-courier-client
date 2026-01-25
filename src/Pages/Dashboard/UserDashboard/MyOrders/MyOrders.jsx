@@ -86,7 +86,7 @@ const MyOrders = () => {
           </Link>
         </div>
       ) : (
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="overflow-x-auto bg-white rounded-2xl shadow-lg">
             <table className="table table-zebra text-accent">
               <thead className="bg-primary text-white">

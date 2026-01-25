@@ -61,7 +61,7 @@ const MyBooks = () => {
                 <td>
                   <Link
                     to={`/dashboard/edit-book/${book?._id}`}
-                    className="btn btn-primary"
+                    className="btn btn-xs md:btn-md btn-primary"
                   >
                     Edit
                   </Link>

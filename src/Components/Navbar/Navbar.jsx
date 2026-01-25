@@ -69,18 +69,18 @@ const Navbar = () => {
             <img
               src={user.photoURL}
               alt="User"
-              className="w-10 h-10 rounded-full ring-2 ring-primary"
+              className="w-6 md:w-10 h-6 md:h-10 rounded-full ring-2 ring-primary"
             />
             <motion.button
               whileHover={{
                 rotateX: 20,
                 rotateY: 15,
-                boxShadow: "1px 3px 4px 1px 10px",
+                boxShadow: "0px 10px 20px rgba(0,0,0,0.3)",
               }}
               style={{ transform: "translateZ(100px)" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               onClick={handleSignOut}
-              className="btn btn-primary hover:bg-secondary  duration-200"
+              className="btn btn-xs md:btn-md btn-primary hover:bg-secondary transition-colors  duration-200"
             >
               Sign Out
             </motion.button>
@@ -96,7 +96,7 @@ const Navbar = () => {
                 }}
                 style={{ transform: "translateZ(100px)" }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="btn btn-primary hover:bg-secondary transition-colors duration-300"
+                className="btn btn-xs md:btn-md btn-primary hover:bg-secondary transition-colors duration-300"
               >
                 Login
               </motion.span>
@@ -110,7 +110,7 @@ const Navbar = () => {
                 }}
                 style={{ transform: "translateZ(100px)" }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="btn btn-outline btn-primary hover:bg-primary hover:text-white transition-colors duration-300"
+                className="btn btn-xs md:btn-md btn-outline btn-primary hover:bg-primary hover:text-white transition-colors duration-300"
               >
                 Register
               </motion.span>

@@ -32,7 +32,7 @@ const LatestBook = ({ books }) => {
             }}
             style={{ transform: "translateZ(100px)" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="btn btn-primary"
+            className="btn btn-xs md:btn-md btn-primary"
           >
             All Books
           </motion.span>

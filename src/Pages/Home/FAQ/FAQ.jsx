@@ -12,11 +12,6 @@ const faqs = [
       "We currently deliver to all major cities and districts across the country.",
   },
   {
-    question: "How can I track my order?",
-    answer:
-      "After placing an order, you will receive a tracking ID to monitor delivery status.",
-  },
-  {
     question: "Is online payment secure?",
     answer:
       "Yes, all payments are encrypted and processed through secure payment gateways.",

@@ -18,7 +18,7 @@ const ManageBooks = () => {
     queryKey: ["books", searchText],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/all-books-admin?searchText=${searchText}`
+        `/all-books-admin?searchText=${searchText}`,
       );
       return res.data;
     },
@@ -31,7 +31,7 @@ const ManageBooks = () => {
 
   const handleUpdateStatus = async (book, newStatus) => {
     const res = await axiosSecure.patch(
-      `/books?bookId=${book._id}&newStatus=${newStatus}`
+      `/books?bookId=${book._id}&newStatus=${newStatus}`,
     );
     if (res.data.modifiedCount) {
       refetch();
@@ -89,7 +89,7 @@ const ManageBooks = () => {
         <form onSubmit={handleSubmit(handleSearch)}>
           <fieldset className="flex items-center">
             <label
-              className="input rounded-l-4xl
+              className="input input-xs md:input-md rounded-l-4xl
   bg-linear-to-r from-primary/10 to-secondary/10
   border border-primary
 "
@@ -116,7 +116,9 @@ const ManageBooks = () => {
                 {...register("search", { required: true })}
               />
             </label>
-            <button className="btn btn-primary font-bold">Search</button>
+            <button className="btn btn-xs md:btn-md btn-primary font-bold">
+              Search
+            </button>
           </fieldset>
         </form>
       </div>

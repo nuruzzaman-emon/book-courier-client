@@ -104,13 +104,13 @@ const AllUsers = () => {
                     <div className="flex justify-center gap-2">
                       <button
                         onClick={() => handleSetUserRole(user, "admin")}
-                        className="btn btn-sm btn-outline btn-primary"
+                        className="btn btn-xs md:btn-md btn-outline btn-primary"
                       >
                         Make Admin
                       </button>
                       <button
                         onClick={() => handleSetUserRole(user, "librarian")}
-                        className="btn btn-sm btn-outline btn-secondary"
+                        className="btn btn-xs md:btn-md btn-outline btn-secondary"
                       >
                         Make Librarian
                       </button>

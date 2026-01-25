@@ -4,10 +4,28 @@ import { CgProfile } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 import { Link, Outlet } from "react-router";
+const menuItems = [
+  { to: "/", icon: <AiOutlineHome size={20} />, label: "Homepage" },
+  {
+    to: "/dashboard/all-users",
+    icon: <FaUsers size={20} />,
+    label: "All-users",
+  },
+  {
+    to: "/dashboard/manage-books",
+    icon: <SiNginxproxymanager size={20} />,
+    label: "Manage Books",
+  },
+  {
+    to: "/dashboard/my-profile",
+    icon: <CgProfile size={20} />,
+    label: "My Profile",
+  },
+];
 
 const AdminDashboard = () => {
   return (
-    <div className="bg-[#30336b] py-12 ">
+    <div className="bg-[#30336b] py-12">
       <h2 className="text-5xl text-white font-bold  text-center">
         Admin DashBoard
       </h2>
@@ -15,7 +33,7 @@ const AdminDashboard = () => {
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Navbar */}
-          <nav className="navbar w-full text-white">
+          <nav className="navbar w-full bg-[#30336b] text-white">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
@@ -37,10 +55,10 @@ const AdminDashboard = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4 text-2xl font-bold">Admin Panel</div>
+            <div className="px-4  text-2xl font-bold">Admin Panel</div>
           </nav>
           {/* Page content here */}
-          <div className="p-4 bg-white ">
+          <div className="min-h-screen h-auto p-4 bg-white">
             <Outlet></Outlet>
           </div>
         </div>
@@ -51,64 +69,22 @@ const AdminDashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="flex min-h-full flex-col items-start  is-drawer-close:w-14 is-drawer-open:w-64">
+          <div className="flex min-h-full flex-col items-start bg-[#30336b] is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
             <ul className="menu w-full grow text-white">
-              {/* home page */}
-              <li>
-                <Link
-                  to="/"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Home"
-                >
-                  {/* Home icon */}
-                  <AiOutlineHome size={20} />
-                  <span className="is-drawer-close:hidden">Home</span>
-                </Link>
-              </li>
-              {/* All Users */}
-              <li>
-                <Link
-                  to="/dashboard/all-users"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="All Users"
-                >
-                  {/* users icon */}
-                  <FaUsers size={20}></FaUsers>
-                  <span className="is-drawer-close:hidden mx-1">
-                    {" "}
-                    All Users
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/dashboard/manage-books"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage Books"
-                >
-                  {/* manage icon */}
-                  <SiNginxproxymanager size={20} />
-                  <span className="is-drawer-close:hidden mx-1">
-                    {" "}
-                    Manage Books
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/dashboard/my-profile"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="All Users"
-                >
-                  {/* Profile icon */}
-                  <CgProfile size={20} />
-                  <span className="is-drawer-close:hidden mx-1">
-                    {" "}
-                    My Profile
-                  </span>
-                </Link>
-              </li>
+              {menuItems.map((item) => (
+                <li>
+                  <Link
+                    to={`${item.to}`}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right "
+                    data-tip={item.label}
+                  >
+                    {/* icon */}
+                    {item.icon}
+                    <span className="is-drawer-close:hidden">{item.label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
