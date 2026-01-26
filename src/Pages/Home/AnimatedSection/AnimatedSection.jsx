@@ -68,7 +68,7 @@ const AnimatedSection = ({ allDataCount }) => {
             whileInView="visible"
             whileHover={{ rotateY: [25, 0], transition: { duration: 0.2 } }}
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.3, delay: id * 0.3 }}
+            transition={{ duration: 0.2, delay: id * 0.3 }}
             key={id}
             className="stat shadow-xl flex items-center justify-center"
           >

@@ -32,7 +32,6 @@ const BookDetails = () => {
       return res.data;
     },
   });
-  console.log(reviewPermission);
   const {
     register,
     handleSubmit,

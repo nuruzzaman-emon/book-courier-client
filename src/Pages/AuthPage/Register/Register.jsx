@@ -4,15 +4,13 @@ import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../../../Components/Loading/Loading";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link,  useNavigate } from "react-router";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
   const axiosGeneral = useAxios();
   const { createUser, updateUserProfile } = useAuth();
 
@@ -71,7 +69,7 @@ const Register = () => {
         setLoading(false);
         console.log(err);
       });
-    console.log(data);
+    // console.log(data);
   };
 
   if (loading) {

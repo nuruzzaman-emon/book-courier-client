@@ -15,7 +15,7 @@ const Book = ({ book, delay = 0 }) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.2, delay }}
+        transition={{ duration: 0.1, delay }}
         className="card"
       >
         {/* First content: full image */}

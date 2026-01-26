@@ -52,7 +52,7 @@ const Process = () => {
             variants={cardVariants}
             initial="hidden"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: step.id * 0.5 }}
+            transition={{ duration: 0.2, delay: step.id * 0.3 }}
             whileInView="visible"
             className=" shadow-xl p-8"
           >

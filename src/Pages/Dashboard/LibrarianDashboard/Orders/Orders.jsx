@@ -40,7 +40,6 @@ const Orders = () => {
         refetch();
       }
     });
-    console.log(id, newStatus);
   };
 
   // cancel order
