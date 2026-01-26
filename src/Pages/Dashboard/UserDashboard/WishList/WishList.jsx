@@ -50,7 +50,7 @@ const WishList = () => {
       </div>
 
       {/* Table Card */}
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto md:px-4">
         <div className="card bg-base-100 shadow-xl">
           <div className="card-body p-0">
             <div className="overflow-x-auto">

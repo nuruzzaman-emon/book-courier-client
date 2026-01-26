@@ -61,7 +61,7 @@ const Orders = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       {/* Header */}
       <div className="mb-8 flex flex-col items-center justify-center">
         <h2

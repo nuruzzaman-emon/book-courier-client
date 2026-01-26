@@ -44,7 +44,7 @@ const AllBooks = () => {
       <div className="flex justify-center my-8 ">
         <form onSubmit={handleSearch} className="flex items-center">
           <label
-            className="input rounded-l-4xl
+            className="input input-sm md:input-md rounded-l-4xl
   bg-linear-to-r from-primary/10 to-secondary/10
   border border-primary
 "
@@ -67,7 +67,7 @@ const AllBooks = () => {
             </svg>
             <input type="search" name="search" placeholder="Search" />
           </label>
-          <button className="btn btn-primary rounded-r-4xl">Search</button>
+          <button className="btn btn-sm md:btn-md btn-primary rounded-r-4xl">Search</button>
         </form>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-8">

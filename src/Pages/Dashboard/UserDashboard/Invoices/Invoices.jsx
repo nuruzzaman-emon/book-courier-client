@@ -42,7 +42,7 @@ const Invoices = () => {
       </div>
 
       {/* Card */}
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto md:px-4">
         <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
           <div className="overflow-x-auto rounded-2xl">
             <table className="table text-slate-200">

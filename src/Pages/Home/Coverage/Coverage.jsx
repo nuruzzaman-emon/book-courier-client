@@ -58,7 +58,7 @@ const Coverage = ({ mapData }) => {
           <fieldset className="flex items-center gap-0">
             <div>
               <label
-                className="input input-xs md:input-md rounded-l-full px-5 flex items-center gap-2
+                className="input input-sm md:input-md rounded-l-full px-5 flex items-center gap-2
                   bg-linear-to-r from-primary/10 to-secondary/10
                   border border-primary
                   focus-within:ring-2 focus-within:ring-primary/30
@@ -94,7 +94,7 @@ const Coverage = ({ mapData }) => {
             </div>
 
             <button
-              className="btn btn-xs md:btn-md btn-primary rounded-r-full px-8 font-bold
+              className="btn btn-sm md:btn-md btn-primary rounded-r-full px-8 font-bold
                 shadow-md hover:shadow-primary/40 transition-all duration-300"
             >
               Search
@@ -104,7 +104,7 @@ const Coverage = ({ mapData }) => {
       </div>
 
       {/* MAP */}
-      <div className=" h-200 md:h-125">
+      <div className=" h-[500px] md:h-[600px">
         <MapContainer
           ref={mapRef}
           center={position}

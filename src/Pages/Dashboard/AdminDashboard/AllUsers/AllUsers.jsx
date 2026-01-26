@@ -50,7 +50,7 @@ const AllUsers = () => {
         </p>
       </div>
       {/* Table Card */}
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto md:px-4">
         <div className="overflow-x-auto rounded-2xl shadow-2xl bg-base-100">
           <table className="table w-full">
             {/* head */}

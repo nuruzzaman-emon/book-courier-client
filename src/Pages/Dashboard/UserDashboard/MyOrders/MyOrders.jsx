@@ -65,7 +65,7 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-secondary to-green-900 p-6">
+    <div className="min-h-screen bg-linear-to-br from-secondary to-green-900 md:p-6">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-4xl font-extrabold text-white">
@@ -86,7 +86,7 @@ const MyOrders = () => {
           </Link>
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto md:px-4">
           <div className="overflow-x-auto bg-white rounded-2xl shadow-lg">
             <table className="table table-zebra text-accent">
               <thead className="bg-primary text-white">

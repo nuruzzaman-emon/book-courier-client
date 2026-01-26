@@ -75,7 +75,7 @@ const ManageBooks = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-6 bg-base-100 rounded-2xl shadow-xl min-h-screen">
+    <div className="md:p-6 bg-base-100 rounded-2xl shadow-xl min-h-screen">
       {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -89,7 +89,7 @@ const ManageBooks = () => {
         <form onSubmit={handleSubmit(handleSearch)}>
           <fieldset className="flex items-center">
             <label
-              className="input input-xs md:input-md rounded-l-4xl
+              className="input input-sm md:input-md rounded-l-4xl
   bg-linear-to-r from-primary/10 to-secondary/10
   border border-primary
 "
@@ -116,7 +116,7 @@ const ManageBooks = () => {
                 {...register("search", { required: true })}
               />
             </label>
-            <button className="btn btn-xs md:btn-md btn-primary font-bold">
+            <button className="btn btn-sm md:btn-md btn-primary font-bold">
               Search
             </button>
           </fieldset>
