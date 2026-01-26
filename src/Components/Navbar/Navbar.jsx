@@ -3,9 +3,11 @@ import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 import { motion } from "motion/react";
+import useRole from "../../hooks/useRole";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
+  const { role } = useRole();
 
   const links = (
     <>
@@ -16,7 +18,17 @@ const Navbar = () => {
         <NavLink to="/all-books">All Books</NavLink>
       </li>
       <li className="md:text-lg font-semibold hover:text-primary transition-colors duration-300">
-        <NavLink to="/dashboard/my-profile">Dashboard</NavLink>
+        <NavLink
+          to={
+            role === "admin"
+              ? "/dashboard/all-users"
+              : role === "librarian"
+                ? "/dashboard/my-books"
+                : "/dashboard/my-orders"
+          }
+        >
+          Dashboard
+        </NavLink>
       </li>
     </>
   );

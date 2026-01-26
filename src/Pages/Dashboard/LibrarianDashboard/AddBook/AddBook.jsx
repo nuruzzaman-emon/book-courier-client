@@ -70,7 +70,7 @@ const AddBook = () => {
   return (
     <div className="p-6">
       <h2
-          className="text-3xl md:text-5xl font-bold 
+          className="text-3xl md:text-4xl font-bold 
           bg-linear-to-r from-primary to-secondary 
           bg-clip-text text-transparent text-center my-4"
         >

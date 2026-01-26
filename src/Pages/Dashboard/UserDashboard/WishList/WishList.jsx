@@ -43,7 +43,7 @@ const WishList = () => {
     <div className="min-h-screen bg-linear-to-br from-base-200 to-base-300 py-12">
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-primary">❤️ My Wishlist</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-primary">❤️ My Wishlist</h2>
         <p className="text-base-content/70 mt-2">
           Books you’ve saved for later
         </p>

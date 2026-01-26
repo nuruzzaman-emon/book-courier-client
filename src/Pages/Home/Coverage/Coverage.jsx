@@ -2,10 +2,19 @@ import React, { useRef } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Swal from "sweetalert2";
+import L from "leaflet";
+import marker from "./location-dot-solid-full.svg";
 
 const Coverage = ({ mapData }) => {
   const mapRef = useRef(null);
   const position = [23.685, 90.3563];
+
+  const customMarker = new L.Icon({
+    iconUrl: marker,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -118,7 +127,11 @@ const Coverage = ({ mapData }) => {
           />
 
           {mapData?.map((center, i) => (
-            <Marker key={i} position={[center.latitude, center.longitude]}>
+            <Marker
+              key={i}
+              icon={customMarker}
+              position={[center.latitude, center.longitude]}
+            >
               <Popup>
                 <h3 className="font-bold text-primary text-lg">
                   📚 {center.city}

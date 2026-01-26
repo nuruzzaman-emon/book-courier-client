@@ -28,7 +28,7 @@ const Invoices = () => {
       {/* Header */}
       <div className="mb-10 flex items-center justify-center text-center">
         <div>
-          <h2 className="text-4xl font-extrabold  text-white flex items-center gap-3 justify-center">
+          <h2 className=" text-3xl md:text-4xl font-bold  text-white flex items-center gap-3 justify-center">
             <FaReceipt className="text-indigo-400" />
             Payment History
           </h2>

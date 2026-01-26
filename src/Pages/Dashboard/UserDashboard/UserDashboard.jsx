@@ -78,8 +78,8 @@ const UserDashboard = () => {
           <div className="flex min-h-full flex-col items-start bg-[#30336b] text-white  is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
             <ul className="menu w-full grow">
-              {menuItems.map((item) => (
-                <li>
+              {menuItems.map((item, i) => (
+                <li key={i}>
                   <Link
                     to={`${item.to}`}
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right "

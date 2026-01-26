@@ -65,7 +65,7 @@ const Orders = () => {
       {/* Header */}
       <div className="mb-8 flex flex-col items-center justify-center">
         <h2
-          className="text-3xl md:text-5xl font-bold 
+          className="text-3xl md:text-4xl font-bold 
           bg-linear-to-r from-primary to-secondary 
           bg-clip-text text-transparent text-center my-3"
         >

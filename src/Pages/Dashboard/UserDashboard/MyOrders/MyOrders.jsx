@@ -68,7 +68,7 @@ const MyOrders = () => {
     <div className="min-h-screen bg-linear-to-br from-secondary to-green-900 md:p-6">
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-extrabold text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
           📦 Order Management
         </h2>
         <p className="text-gray-300 mt-2">

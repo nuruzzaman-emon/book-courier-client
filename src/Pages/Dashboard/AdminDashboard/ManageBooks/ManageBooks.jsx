@@ -78,7 +78,7 @@ const ManageBooks = () => {
     <div className="md:p-6 bg-base-100 rounded-2xl shadow-xl min-h-screen">
       {/* Header */}
       <div className="text-center mb-10">
-        <h2 className="text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-4xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Books Management
         </h2>
         <span className="badge badge-primary badge-lg mt-3">
