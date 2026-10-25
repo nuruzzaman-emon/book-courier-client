@@ -23,7 +23,9 @@ const MyOrders = () => {
   } = useQuery({
     queryKey: ["my-orders", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/my-orders?email=${user?.email}`);
+      const res = await axiosSecure.get("/my-orders", {
+        params: { email: user?.email },
+      });
       return res.data;
     },
   });
@@ -34,33 +36,42 @@ const MyOrders = () => {
   }
 
   const handlePayment = async (order) => {
-    const paymentInfo = {
-      bookName: order.bookName,
-      orderId: order._id,
-      customerEmail: order.customerEmail,
-      price: order.price,
-    };
-    const res = await axiosSecure.post(
-      "/payment-checkout-sessions",
-      paymentInfo,
-    );
-    window.location.assign(res.data.url);
+    try {
+      const paymentInfo = {
+        bookName: order.bookName,
+        orderId: order._id,
+        customerEmail: order.customerEmail,
+        price: order.price,
+      };
+      const res = await axiosSecure.post(
+        "/payment-checkout-sessions",
+        paymentInfo,
+      );
+      if (!res.data.url) throw new Error("The payment page could not be opened.");
+      window.location.assign(res.data.url);
+    } catch (error) {
+      Swal.fire("Could not start payment", error.message, "error");
+    }
   };
 
   const handleCancel = async (id) => {
     const updateDoc = {
       status: "cancelled",
     };
-    const res = await axiosSecure.patch(`/book-orders/${id}`, updateDoc);
-    if (res.data.modifiedCount) {
-      refetch();
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Your Ordered Has Been Cancelled",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+    try {
+      const res = await axiosSecure.patch(`/book-orders/${id}`, updateDoc);
+      if (res.data.modifiedCount) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your order has been cancelled",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    } catch (error) {
+      Swal.fire("Could not cancel order", error.message, "error");
     }
   };
 

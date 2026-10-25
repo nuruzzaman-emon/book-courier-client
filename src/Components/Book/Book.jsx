@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
-import { motion } from "motion/react";
+import { motion as Motion } from "motion/react";
 
 const Book = ({ book, delay = 0 }) => {
   const cardVariants = {
@@ -10,7 +10,7 @@ const Book = ({ book, delay = 0 }) => {
   };
   return (
     <StyledWrapper>
-      <motion.div
+      <Motion.div
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
@@ -20,7 +20,7 @@ const Book = ({ book, delay = 0 }) => {
       >
         {/* First content: full image */}
         <div className="first-content">
-          <img src={book?.bookPhotoURL} alt="" />
+          <img src={book?.bookPhotoURL} alt="" loading="lazy" />
         </div>
 
         {/* Second content: overlay with title + button */}
@@ -31,7 +31,7 @@ const Book = ({ book, delay = 0 }) => {
             <button className="btn my-3">View Details</button>
           </Link>
         </div>
-      </motion.div>
+      </Motion.div>
     </StyledWrapper>
   );
 };
@@ -47,6 +47,11 @@ const StyledWrapper = styled.div`
     position: relative;
     transition: all 0.4s;
     cursor: pointer;
+  }
+
+  html[data-theme="dark"] & .card {
+    border: 0;
+    box-shadow: none;
   }
 
   /* First content: full image */

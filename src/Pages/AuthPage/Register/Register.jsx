@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../../../Components/Loading/Loading";
-import { Link,  useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import useAxios from "../../../hooks/useAxios";
+import { uploadProfileImage } from "../../../utils/uploadImageToCloudinary";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -20,56 +20,62 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegistration = (data) => {
+  const handleRegistration = async (data) => {
     setLoading(true);
-    const profileImg = data.photo[0];
-    createUser(data.email, data.password)
-      .then(() => {
-        //store the profile img
-        const formData = new FormData();
-        formData.append("image", profileImg);
+    let registrationStep = "Uploading your profile photo";
+    let photoURL = "/default-avatar.svg";
+    let photoUploadFailed = false;
+    let photoUploadError = "";
+    try {
+      if (data.photo?.[0]) {
+        try {
+          photoURL = await uploadProfileImage(data.photo[0]);
+        } catch (error) {
+          photoUploadFailed = true;
+          photoUploadError = error.message;
+        }
+      } else {
+        photoUploadFailed = true;
+        photoUploadError = "No photo was selected.";
+      }
 
-        //get the url
-        const image_Api_Url = `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_img_host_key
-        }`;
+      registrationStep = "Creating your account";
+      await createUser(data.email, data.password);
 
-        axios.post(image_Api_Url, formData).then((res) => {
-          const photo = res.data.data.url;
-
-          //update profile
-          const userProfile = {
-            displayName: data.name,
-            photoURL: photo,
-          };
-
-          updateUserProfile(userProfile).then(() => {
-            const user = {
-              displayName: data.name,
-              photoURL: photo,
-              email: data.email,
-            };
-            axiosGeneral.post("/users", user).then((res) => {
-              if (res.data.insertedId) {
-                navigate("/");
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Registered Successfullly",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                setLoading(false);
-              }
-            });
-          });
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
+      registrationStep = "Saving your account profile";
+      await updateUserProfile({ displayName: data.name, photoURL });
+      const response = await axiosGeneral.post("/users", {
+        displayName: data.name,
+        photoURL,
+        email: data.email,
       });
-    // console.log(data);
+      if (!response.data.insertedId) {
+        throw new Error(
+          response.data.message ||
+            "The server did not confirm that your profile was saved.",
+        );
+      }
+
+      navigate("/");
+      Swal.fire({
+        position: "center",
+        icon: photoUploadFailed ? "warning" : "success",
+        title: photoUploadFailed ? "Account created with a default photo" : "Registration successful",
+        text: photoUploadFailed
+          ? `Your photo could not be uploaded, so we used a default avatar. Cloudinary: ${photoUploadError}`
+          : "",
+        confirmButtonText: "Continue",
+      });
+    } catch (err) {
+      const detail =
+        err.response?.data?.error?.message ||
+        err.response?.data?.message ||
+        err.code ||
+        err.message;
+      Swal.fire(`${registrationStep} failed`, detail, "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -78,7 +84,9 @@ const Register = () => {
 
   return (
     <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl p-10">
-      <h1 className="text-5xl font-bold text-secondary text-center">Register now!</h1>
+      <h1 className="text-5xl font-bold text-secondary text-center">
+        Register now!
+      </h1>
       <div className="card-body p-10">
         <form onSubmit={handleSubmit(handleRegistration)}>
           <fieldset className="fieldset">
@@ -143,7 +151,9 @@ const Register = () => {
               </p>
             )}
             <div>
-              <a className="link link-hover">Forgot password?</a>
+              <Link to="/auth/forgot-password" className="link link-hover">
+                Forgot password?
+              </Link>
             </div>
             <button className="btn btn-primary mt-4">Register</button>
           </fieldset>
@@ -154,7 +164,7 @@ const Register = () => {
             <span className="text-secondary text-xl font-bold"> Login</span>
           </Link>
         </p>
-      <SocialLogin></SocialLogin>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

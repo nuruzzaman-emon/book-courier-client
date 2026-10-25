@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion as Motion } from "motion/react";
 import React, { useState } from "react";
 import {
   FaBookOpen,
@@ -69,12 +69,12 @@ const WhyFromUs = () => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="rounded-2xl shadow-2xl mt-20 p-8">
-      <div className="text-center mb-8">
+    <div className="rounded-xl shadow-2xl p-6">
+      <div className="text-center ">
         <h2 className="text-3xl md:text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Why Choose BookCourier?
         </h2>
-        <p className="mt-2  text-neutral font-bold">
+        <p className="my-3  text-accent font-bold">
           More than just a bookstore — we deliver knowledge with care.
         </p>
       </div>
@@ -82,34 +82,34 @@ const WhyFromUs = () => {
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative"
+        className="relative "
       >
         {/* Show big H2 before hover */}
         {!hovered && (
-          <div className="min-h-[50vh] shadow-2xl flex items-center justify-center">
-            <motion.h2
+          <div className="min-h-[50vh]  flex items-center justify-center">
+            <Motion.h2
               initial={{ scale: 1.5, rotate: 15, opacity: 0.7 }}
               animate={{ scale: 1, rotate: 0, opacity: 1 }}
               className=" text-2xl md:text-4xl font-extrabold text-center bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent my-10 "
             >
               Just Hover and See!
-            </motion.h2>
+            </Motion.h2>
           </div>
         )}
 
         {/* Cards container */}
         {hovered && (
-          <motion.div
-            className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 shadow-2xl p-5"
+          <Motion.div
+            className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  "
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {cards.map((card, i) => (
-              <motion.div
+              <Motion.div
                 key={i}
                 variants={cardVariants}
-                className={`relative overflow-hidden rounded-2xl p-6 text-center bg-linear-to-br ${card.bg} shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group`}
+                className={`relative overflow-hidden rounded-2xl p-4 text-center bg-linear-to-br ${card.bg} shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group`}
               >
                 <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></div>
                 <div className="flex justify-center mb-4 relative z-10">
@@ -123,9 +123,9 @@ const WhyFromUs = () => {
                 <p className="text-white/90 text-sm leading-relaxed relative z-10">
                   {card.desc}
                 </p>
-              </motion.div>
+              </Motion.div>
             ))}
-          </motion.div>
+          </Motion.div>
         )}
       </div>
     </div>

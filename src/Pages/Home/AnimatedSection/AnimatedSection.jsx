@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { FaUsers, FaRegStar } from "react-icons/fa";
 import { SiWikibooks } from "react-icons/si";
 import { BsFillBoxFill, BsFillCreditCard2FrontFill } from "react-icons/bs";
@@ -49,20 +49,20 @@ const AnimatedSection = ({ allDataCount }) => {
     visible: { opacity: 1, y: 0 },
   };
   return (
-    <div className="my-10 shadow-2xl p-6">
+    <div className="rounded-xl shadow-2xl p-6">
       <div className="flex flex-col justify-center items-center  md:p-8">
         <h2 className="text-3xl md:text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           {" "}
           Platform at a Glance
         </h2>
-        <p className="font-bold text-accent">
+        <p className=" mt-2 font-bold text-accent">
           {" "}
           A snapshot of users, books, and activity.
         </p>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-8">
         {statsData.map(({ id, title, valueKey, icon }) => (
-          <motion.div
+          <Motion.div
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -70,7 +70,7 @@ const AnimatedSection = ({ allDataCount }) => {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.2, delay: id * 0.3 }}
             key={id}
-            className="stat shadow-xl flex items-center justify-center"
+            className="stat flex items-center justify-center rounded-2xl border border-base-300 bg-base-100 shadow-lg transition-colors"
           >
             <div>
               <div className="stat-title text-2xl font-bold">{title}</div>
@@ -80,10 +80,10 @@ const AnimatedSection = ({ allDataCount }) => {
               <div className="stat-desc">Till Now</div>
             </div>
             <div className="text-primary">{icon}</div>
-          </motion.div>
+          </Motion.div>
         ))}
       </div>
-      <motion.p
+      <Motion.p
         variants={cardVariants}
         initial="hidden"
         whileInView="visible"
@@ -92,7 +92,7 @@ const AnimatedSection = ({ allDataCount }) => {
         className=" font-bold text-center mb-2 text-accent"
       >
         Figures shown for demonstration purposes.
-      </motion.p>
+      </Motion.p>
     </div>
   );
 };

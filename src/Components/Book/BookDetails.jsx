@@ -7,7 +7,7 @@ import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import BookReview from "../BookReview/BookReview";
+import BookReview from "./BookReview";
 
 const BookDetails = () => {
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
@@ -16,7 +16,7 @@ const BookDetails = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
-  const { data: book = {}, isLoading } = useQuery({
+  const { data: book = {}, isLoading, isError } = useQuery({
     queryKey: ["book-details", id, reviewSubmitted],
     queryFn: async () => {
       const res = await axiosSecure.get(`/book-details/${id}`);
@@ -25,7 +25,7 @@ const BookDetails = () => {
   });
 
   const { data: reviewPermission, refetch } = useQuery({
-    queryKey: ["book-orders", id],
+    queryKey: ["book-orders", id, user?.email],
     enabled: !!book._id,
     queryFn: async () => {
       const res = await axiosSecure.get(`/book-review-permission/${id}`);
@@ -64,7 +64,6 @@ const BookDetails = () => {
             showConfirmButton: false,
             timer: 2000,
           });
-          orderRef.current?.close();
         }
       })
       .catch((err) => {
@@ -97,7 +96,7 @@ const BookDetails = () => {
           Swal.fire({
             position: "center",
             icon: "info",
-            html: `<span class="text-red-500 font-semibold">${book.bookName} is already in wishlist</span>`,
+            text: `${book.bookName} is already in your wishlist.`,
             showConfirmButton: false,
             timer: 3000,
             customClass: {
@@ -134,6 +133,9 @@ const BookDetails = () => {
 
   if (isLoading) {
     return <Loading></Loading>;
+  }
+  if (isError || !book._id) {
+    return <p className="p-12 text-center">This book could not be found.</p>;
   }
   return (
     <div className="max-w-7xl mx-auto p-12 card bg-linear-to-r from-indigo-300 via-purple-200 to-pink-200 shadow-xl">

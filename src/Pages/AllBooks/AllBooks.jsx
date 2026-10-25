@@ -9,14 +9,17 @@ const AllBooks = () => {
   const [searchText, setSearchText] = useState("");
   const limit = 8;
   const axiosGeneral = useAxios();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["all-books", searchText, currentPage],
     queryFn: async () => {
-      const res = await axiosGeneral.get(
-        `/all-books?status=published&limit=${limit}&skip=${
-          currentPage * limit
-        }&searchText=${searchText}`,
-      );
+      const res = await axiosGeneral.get("/all-books", {
+        params: {
+          status: "published",
+          limit,
+          skip: currentPage * limit,
+          searchText,
+        },
+      });
       return res.data;
     },
   });
@@ -27,11 +30,15 @@ const AllBooks = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchText(e.target.search.value);
+    setSearchText(e.target.search.value.trim());
+    setCurrentPage(0);
   };
 
   if (isLoading) {
     return <Loading></Loading>;
+  }
+  if (isError) {
+    return <p className="py-12 text-center text-error">Could not load books. Please try again.</p>;
   }
 
   return (
@@ -75,6 +82,9 @@ const AllBooks = () => {
           <Book key={book._id} book={book} delay={i * 0.3}></Book>
         ))}
       </div>
+      {allBooks.length === 0 && (
+        <p className="py-12 text-center text-base-content/70">No books found.</p>
+      )}
       <div className="flex justify-center flex-wrap gap-2 p-6">
         {currentPage > 0 && (
           <button

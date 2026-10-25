@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://book-courier-server-theta.vercel.app",
+  baseURL: "https://book-courier2-server.vercel.app/",
 });
-
-import React from "react";
 
 const useAxios = () => {
   return instance;

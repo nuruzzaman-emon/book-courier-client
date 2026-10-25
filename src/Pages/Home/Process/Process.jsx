@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "motion/react";
+import { motion as Motion } from "motion/react";
 import { FaSearch, FaShoppingCart, FaLock, FaTruck } from "react-icons/fa";
 
 const processSteps = [
@@ -36,30 +36,30 @@ const Process = () => {
   };
 
   return (
-    <div className="shadow-2xl my-12 p-8">
+    <div className="rounded-xl shadow-2xl p-6">
       <div className="text-center">
         <h2 className="text-3xl md:text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
           Our Process
         </h2>
-        <p className="text-para font-bold">
+        <p className="text-accent font-bold">
           Simple steps to get your favorite books delivered
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
         {processSteps.map((step) => (
-          <motion.div
+          <Motion.div
             key={step.id}
             variants={cardVariants}
             initial="hidden"
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.2, delay: step.id * 0.3 }}
             whileInView="visible"
-            className=" shadow-xl p-8"
+            className="rounded-2xl border border-base-300 bg-base-100 p-8 shadow-lg transition-colors"
           >
             <span className="text-primary ">{step.icon}</span>
             <h2 className="text-xl font-bold mt-5">{step.title}</h2>
-            <p className="text-neutral">{step.description}</p>
-          </motion.div>
+            <p className="text-accent">{step.description}</p>
+          </Motion.div>
         ))}
       </div>
     </div>

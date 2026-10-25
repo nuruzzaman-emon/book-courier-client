@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import Loading from "../../../Components/Loading/Loading";
 import Swal from "sweetalert2";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { email: location.state?.email || "" } });
 
   const handleLogin = (data) => {
     setLoading(true);
@@ -36,10 +37,6 @@ const Login = () => {
         setLoading(false);
       });
   };
-
-  if (loading) {
-    return <Loading></Loading>;
-  }
 
   return (
     <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl p-10">
@@ -73,8 +70,6 @@ const Login = () => {
               {...register("password", {
                 required: true,
                 minLength: 6,
-                pattern:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/,
               })}
             />
             {errors.password?.type === "required" && (
@@ -86,10 +81,13 @@ const Login = () => {
                 character and must be 6 digit
               </p>
             )}
-            <div>
-              <a className="link link-hover">Forgot password?</a>
+            <div className="mt-2 text-right">
+              <Link to="/auth/forgot-password" className="link link-hover text-sm font-semibold">Forgot password?</Link>
             </div>
-            <button className="btn btn-primary mt-4">Login</button>
+            <button className="btn btn-primary mt-4">
+              {loading && <span className=" animate-spin"><AiOutlineLoading3Quarters />
+</span>} Login
+            </button>
           </fieldset>
         </form>
         <p>

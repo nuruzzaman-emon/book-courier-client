@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../Loading/Loading";
-import axios from "axios";
 import Swal from "sweetalert2";
+import uploadImageToCloudinary from "../../utils/uploadImageToCloudinary";
 
 const BookEdited = () => {
   const [loading, setLoading] = useState(false);
@@ -31,56 +31,37 @@ const BookEdited = () => {
   });
   //   console.log(selectedBook);
 
-  const handleEditBook = (data) => {
+  const handleEditBook = async (data) => {
     setLoading(true);
-    const image = data.bookPhoto[0];
-    const formData = new FormData();
-    formData.append("image", image);
-
-    //get image url
-    const Image_Api_Url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_img_host_key
-    }`;
-    axios.post(Image_Api_Url, formData).then((res) => {
-      const photoUrl = res.data.data.url;
+    try {
       const bookInfo = {
         authorName: data.authorName,
         authorEmail: data.authorEmail,
         authorPhoneNumber: data.authorPhoneNumber,
         bookName: data.bookName,
-        bookPhotoURL: photoUrl,
+        bookPhotoURL: await uploadImageToCloudinary(data.bookPhoto[0]),
         address: data.address,
         status: data.status,
         price: data.price,
         description: data.description,
       };
-      axiosSecure
-        .patch(`/book-details/${id}`, bookInfo)
-        .then((res) => {
-          if (res.data.modifiedCount) {
-            navigate("/dashboard/my-books");
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Your Book Has Been Updated",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            setLoading(false);
-            refetch();
-          }
-        })
-        .catch((err) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `${err.message}`,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          setLoading(false);
-        });
-    });
+      const response = await axiosSecure.patch(`/book-details/${id}`, bookInfo);
+      if (!response.data.modifiedCount) throw new Error("The book was not updated.");
+
+      navigate("/dashboard/my-books");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your book has been updated",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      refetch();
+    } catch (err) {
+      Swal.fire("Could not update book", err.message, "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (isLoading || loading) {
@@ -141,12 +122,13 @@ const BookEdited = () => {
                 </label>
                 <input
                   defaultValue={selectedBook.authorPhoneNumber}
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   className="input mb-3 w-full"
                   placeholder="Write author phone number"
                   {...register("authorPhoneNumber", {
                     required: true,
-                    min: 11,
+                    pattern: /^\d{11}$/,
                   })}
                 />
                 {errors.authorPhoneNumber && (

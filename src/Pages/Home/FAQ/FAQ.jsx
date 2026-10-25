@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 const faqs = [
   {
     question: "How long does book delivery take?",
@@ -30,13 +30,13 @@ const faqVariant = {
 
 const FAQ = () => {
   return (
-    <div className="my-10 shadow-2xl p-6">
+    <div className="rounded-xl shadow-2xl p-6">
       <h2 className="text-3xl md:text-5xl font-extrabold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent text-center">
         Frequently Asked Questions
       </h2>
       <div className="max-w-4xl mx-auto space-y-3 my-8">
         {faqs.map((faq, i) => (
-          <motion.div
+          <Motion.div
             variants={faqVariant}
             initial="hidden"
             whileInView="visible"
@@ -48,7 +48,7 @@ const FAQ = () => {
           >
             <div className="collapse-title font-semibold">{faq.question}</div>
             <div className="collapse-content text-sm">{faq.answer}</div>
-          </motion.div>
+          </Motion.div>
         ))}
       </div>
     </div>

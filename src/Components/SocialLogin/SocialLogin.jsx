@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import useAxios from "../../hooks/useAxios";
-import Loading from "../Loading/Loading";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -10,32 +10,29 @@ const SocialLogin = () => {
   const { signInWithGoogle } = useAuth();
   const axiosGeneral = useAxios();
 
-  const handleSocialLogin = () => {
+  const handleSocialLogin = async () => {
     setLoading(true);
-    signInWithGoogle()
-      .then((res) => {
-        const userInfo = {
-          displayName: res.user.displayName,
-          photoURL: res.user.photoURL,
-          email: res.user.email,
-        };
-        if (res.user) {
-          axiosGeneral.post("/users", userInfo).then(() => {
-            navigate("/");
-            setLoading(false);
-          });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    try {
+      const result = await signInWithGoogle();
+      const userInfo = {
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+        email: result.user.email,
+      };
+      await axiosGeneral.post("/users", userInfo);
+      navigate("/");
+    } catch (error) {
+      Swal.fire("Google sign-in failed", error.message, "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex flex-col justify-center items-center ">
       <p className="my-2">--------or--------</p>
       {/* Google */}
-      <button onClick={handleSocialLogin} className="btn bg-white text-black">
+      <button onClick={handleSocialLogin} disabled={loading} className="btn bg-white text-black">
         <svg
           aria-label="Google logo"
           width="16"
@@ -63,7 +60,7 @@ const SocialLogin = () => {
             ></path>
           </g>
         </svg>
-        Login with Google
+        {loading ? "Signing in…" : "Login with Google"}
       </button>
     </div>
   );

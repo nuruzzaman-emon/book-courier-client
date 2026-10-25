@@ -16,7 +16,9 @@ const Orders = () => {
   } = useQuery({
     queryKey: ["orders", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/orders?email=${user?.email}`);
+      const res = await axiosSecure.get("/orders", {
+        params: { email: user?.email },
+      });
       return res.data;
     },
   });
@@ -27,8 +29,8 @@ const Orders = () => {
 
   // change order status
   const handleStatusChange = async (id, newStatus) => {
-    const updateData = { status: newStatus };
-    axiosSecure.patch(`orders/${id}`, updateData).then((res) => {
+    try {
+      const res = await axiosSecure.patch(`/orders/${id}`, { status: newStatus });
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "center",
@@ -39,7 +41,9 @@ const Orders = () => {
         });
         refetch();
       }
-    });
+    } catch (error) {
+      Swal.fire("Could not update order", error.message, "error");
+    }
   };
 
   // cancel order
@@ -53,9 +57,13 @@ const Orders = () => {
     });
 
     if (result.isConfirmed) {
-      await axiosSecure.patch(`/orders/${id}`, { status: "cancelled" });
-      refetch();
-      Swal.fire("Cancelled!", "Order has been cancelled.");
+      try {
+        await axiosSecure.patch(`/orders/${id}`, { status: "cancelled" });
+        refetch();
+        Swal.fire("Cancelled", "Order has been cancelled.", "success");
+      } catch (error) {
+        Swal.fire("Could not cancel order", error.message, "error");
+      }
     }
   };
 

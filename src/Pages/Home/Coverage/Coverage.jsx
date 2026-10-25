@@ -18,8 +18,9 @@ const Coverage = ({ mapData }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const location = e.target.location.value.toLowerCase();
-    const district = mapData.find((center) =>
+    const location = e.target.location.value.trim().toLowerCase();
+    if (!location) return;
+    const district = mapData?.find((center) =>
       center.district.toLowerCase().includes(location),
     );
 
@@ -44,9 +45,9 @@ const Coverage = ({ mapData }) => {
   };
 
   return (
-    <div className="rounded-2xl shadow-2xl">
+    <div className="p-6 rounded-xl shadow-2xl">
       {/* HEADER SECTION */}
-      <div className="mt-20 text-center">
+      <div className=" text-center">
         <h2
           className="text-3xl md:text-5xl font-extrabold 
           bg-linear-to-r from-primary to-secondary 
@@ -55,7 +56,7 @@ const Coverage = ({ mapData }) => {
           Meet All Our Libraries
         </h2>
 
-        <p className="mt-2 text-neutral font-bold max-w-3xl mx-auto">
+        <p className="mt-2 text-accent font-bold max-w-3xl mx-auto">
           Explore our library locations across different cities and discover the
           areas we proudly serve through our nationwide network.
         </p>
@@ -137,7 +138,7 @@ const Coverage = ({ mapData }) => {
                   📚 {center.city}
                 </h3>
                 <p className="text-sm mt-1 text-gray-600">
-                  {center.covered_area.join(", ")}
+                  {center.covered_area?.join(", ")}
                 </p>
               </Popup>
             </Marker>

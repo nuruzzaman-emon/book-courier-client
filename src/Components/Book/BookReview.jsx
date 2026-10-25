@@ -25,7 +25,7 @@ const BookReview = ({ bookId }) => {
   });
 
   if (isLoading) {
-    <h2>loading.....</h2>;
+    return <p className="py-4 text-center">Loading reviews…</p>;
   }
 
   if (bookReviews.length === 0) {

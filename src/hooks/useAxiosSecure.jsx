@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://book-courier-server-theta.vercel.app",
+  baseURL: "https://book-courier2-server.vercel.app",
 });
 
 import React, { useEffect } from "react";
@@ -12,8 +12,12 @@ const useAxiosSecure = () => {
   useEffect(() => {
     //request interceptors =
     const reqInterceptor = axiosSecure.interceptors.request.use(
-      (config) => {
-        config.headers.Authorization = `Bearer ${user?.accessToken}`;
+      async (config) => {
+        if (user) {
+          config.headers.Authorization = `Bearer ${await user.getIdToken()}`;
+        } else {
+          delete config.headers.Authorization;
+        }
         return config;
       },
       (error) => {

@@ -17,13 +17,16 @@ const WishList = () => {
   } = useQuery({
     queryKey: ["wishList", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`user-wishlist?email=${user?.email}`);
+      const res = await axiosSecure.get("/user-wishlist", {
+        params: { email: user?.email },
+      });
       return res.data;
     },
   });
 
-  const handleItemRemove = (item) => {
-    axiosSecure.delete(`/user-wishlist/${item._id}`).then((res) => {
+  const handleItemRemove = async (item) => {
+    try {
+      const res = await axiosSecure.delete(`/user-wishlist/${item._id}`);
       if (res.data.deletedCount) {
         Swal.fire({
           position: "center",
@@ -34,7 +37,9 @@ const WishList = () => {
         });
         refetch();
       }
-    });
+    } catch (error) {
+      Swal.fire("Could not remove book", error.message, "error");
+    }
   };
 
   if (isLoading) return <Loading />;
@@ -76,7 +81,7 @@ const WishList = () => {
                     </tr>
                   ) : (
                     wishlist.map((item, i) => (
-                      <tr key={i + 1} className="hover:bg-base-200 transition">
+                      <tr key={item._id} className="hover:bg-base-200 transition">
                         <th>{i + 1}</th>
 
                         <td>

@@ -30,19 +30,19 @@ const menuItems = [
 
 const LibrarianDashboard = () => {
   return (
-    <div className="bg-[#30336b] py-12">
-      <h2 className="text-5xl text-white font-bold  text-center">
-        Librarian DashBoard
+    <div className="min-h-screen bg-[#0b1020] px-3 py-6 text-slate-100 sm:px-6 sm:py-10">
+      <h2 className="mb-6 text-center text-3xl font-black tracking-tight text-slate-100 sm:text-4xl">
+        Librarian Dashboard
       </h2>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer mx-auto max-w-[1600px] overflow-hidden rounded-3xl border border-slate-700/70 bg-[#151d31] shadow-2xl shadow-black/30 lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content min-w-0 bg-[#151d31]">
           {/* Navbar */}
-          <nav className="navbar w-full bg-[#30336b] text-white">
+          <nav className="navbar sticky top-0 z-10 w-full border-b border-slate-700/70 bg-[#151d31]/95 text-slate-100 backdrop-blur">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
-              className="btn btn-square btn-ghost"
+              className="btn btn-square btn-ghost text-slate-200 lg:hidden"
             >
               {/* Sidebar toggle icon */}
               <svg
@@ -60,10 +60,10 @@ const LibrarianDashboard = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4  text-2xl font-bold">Librarian Panel</div>
+            <div className="px-4 text-xl font-extrabold tracking-tight sm:text-2xl">Librarian workspace</div>
           </nav>
           {/* Page content here */}
-          <div className="min-h-screen h-auto p-4 bg-white">
+          <div className="min-h-[75vh] bg-[#0f1728] p-3 sm:p-6">
             <Outlet></Outlet>
           </div>
         </div>
@@ -74,14 +74,14 @@ const LibrarianDashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="flex min-h-full flex-col items-start bg-[#30336b] is-drawer-close:w-14 is-drawer-open:w-64">
+          <div className="flex min-h-full flex-col items-start bg-[#171d35] py-5 is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
             <ul className="menu w-full grow text-white">
               {menuItems.map((item,i) => (
                 <li key={i}>
                   <Link
                     to={`${item.to}`}
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right "
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right rounded-xl px-3 py-3 text-slate-300 transition hover:bg-white/10 hover:text-white"
                     data-tip={item.label}
                   >
                     {/* icon */}

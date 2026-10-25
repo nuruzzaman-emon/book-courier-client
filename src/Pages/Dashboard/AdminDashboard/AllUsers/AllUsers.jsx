@@ -18,9 +18,9 @@ const AllUsers = () => {
     },
   });
 
-  const handleSetUserRole = (user, status) => {
-    const newRole = { role: status };
-    axiosSecure.patch(`/users/${user?._id}`, newRole).then((res) => {
+  const handleSetUserRole = async (user, status) => {
+    try {
+      const res = await axiosSecure.patch(`/users/${user?._id}`, { role: status });
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "center",
@@ -31,7 +31,9 @@ const AllUsers = () => {
         });
         refetch();
       }
-    });
+    } catch (error) {
+      Swal.fire("Could not update user role", error.message, "error");
+    }
   };
 
   if (isLoading) {

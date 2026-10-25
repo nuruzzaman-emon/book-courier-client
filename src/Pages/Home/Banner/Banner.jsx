@@ -12,7 +12,7 @@ import Slider from "./Slider";
 
 const Banner = ({ books }) => {
   return (
-    <div className="md:p-6">
+    <div className="p-6 shadow-2xl rounded-xl">
       <Swiper
         loop={true}
         spaceBetween={20}
@@ -25,8 +25,8 @@ const Banner = ({ books }) => {
           disableOnInteraction: false,
         }}
         coverflowEffect={{
-          rotate: 45,
-          stretch: 50,
+          rotate: 30,
+          stretch: 20,
           depth: 300,
           modifier: 1,
           slideShadows: true,

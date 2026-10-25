@@ -3,12 +3,13 @@ import { Link } from "react-router";
 
 const Slider = ({ book }) => {
   return (
-    <div className="relative rounded-2xl shadow-xl overflow-hidden w-full flex flex-col md:flex-row p-1 md:p-4 bg-purple-300 ">
+    <div className="relative rounded-xl shadow-xl overflow-hidden w-full flex flex-col md:flex-row p-1 md:p-4 bg-purple-300 ">
       {/* Image */}
       <div className="md:w-1/2 w-full md:h-80 overflow-hidden  flex-1">
         <img
           src={book.bookPhotoURL}
           alt={book.bookName}
+          loading="lazy"
           className="w-full h-28 md:h-80 object-cover hover:scale-105 transition-transform duration-300"
         />
       </div>
@@ -19,8 +20,8 @@ const Slider = ({ book }) => {
           <h2 className="text-xs md:text-2xl font-bold text-primary mb-2">
             {book.bookName}
           </h2>
-          <p className="text-gray-600 text-sm mb-4 line-clamp-3 hidden md:block">
-            {book?.description.slice(0, 200)}...
+          <p className="text-accent text-sm mb-4 line-clamp-3 hidden md:block">
+            {book?.description?.slice(0, 200)}{book?.description?.length > 200 ? "…" : ""}
           </p>
         </div>
 

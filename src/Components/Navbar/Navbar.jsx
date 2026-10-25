@@ -2,30 +2,32 @@ import React from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
 import useAuth from "../../hooks/useAuth";
-import { motion } from "motion/react";
-import useRole from "../../hooks/useRole";
+import { motion as Motion } from "motion/react";
+import Theme from "../Theme/Theme";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-  const { role } = useRole();
+  
 
   const links = (
     <>
-      <li className="md:text-lg font-semibold hover:text-primary transition-colors duration-300">
-        <NavLink to="/">Home</NavLink>
+      <li>
+        <NavLink to="/" end className="rounded-full px-4 py-2 font-semibold">
+          Home
+        </NavLink>
       </li>
-      <li className="md:text-lg font-semibold hover:text-primary transition-colors duration-300">
-        <NavLink to="/all-books">All Books</NavLink>
-      </li>
-      <li className="md:text-lg font-semibold hover:text-primary transition-colors duration-300">
+      <li>
         <NavLink
-          to={
-            role === "admin"
-              ? "/dashboard/all-users"
-              : role === "librarian"
-                ? "/dashboard/my-books"
-                : "/dashboard/my-orders"
-          }
+          to="/all-books"
+          className="rounded-full px-4 py-2 font-semibold"
+        >
+          All Books
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/dashboard/my-profile"
+          className="rounded-full px-4 py-2 font-semibold"
         >
           Dashboard
         </NavLink>
@@ -33,104 +35,78 @@ const Navbar = () => {
     </>
   );
 
-  const handleSignOut = () => {
-    signOutUser();
-  };
-
   return (
-    <div className="navbar w-11/12 mx-auto bg-base-100 shadow-lg rounded-2xl p-2 md:p-4 my-4">
-      {/* Navbar Start */}
-      <div className="navbar-start">
-        {/* Mobile Menu */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <header className="mx-auto my-2 w-[calc(100%-1rem)] max-w-7xl sm:my-3 sm:w-[calc(100%-2rem)]">
+      <div className="navbar min-h-0 rounded-2xl border border-base-300/70 bg-base-100/95 px-2 py-2 shadow-lg shadow-primary/10 backdrop-blur-md sm:px-4 md:py-3">
+        <div className="navbar-start min-w-0 gap-1">
+          <div className="dropdown lg:hidden">
+            <button
+              type="button"
+              tabIndex={0}
+              aria-label="Open navigation menu"
+              className="btn btn-ghost btn-square btn-sm text-primary"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-50 mt-3 w-56 rounded-2xl border border-base-300 bg-base-100 p-2 shadow-xl"
+            >
+              {links}
+            </ul>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow-xl"
-          >
+          <Logo />
+        </div>
+
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal items-center gap-2 px-1 [&_a.active]:bg-primary/10 [&_a.active]:text-primary [&_a.active]:no-underline">
             {links}
           </ul>
         </div>
-        <Logo />
-      </div>
 
-      {/* Navbar Center */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-4">{links}</ul>
-      </div>
-
-      {/* Navbar End */}
-      <div className="navbar-end flex items-center gap-3">
-        {user ? (
-          <>
-            <img
-              src={user.photoURL}
-              alt="User"
-              className="w-6 md:w-10 h-6 md:h-10 rounded-full ring-2 ring-primary"
-            />
-            <motion.button
-              whileHover={{
-                rotateX: 20,
-                rotateY: 15,
-                boxShadow: "0px 10px 20px rgba(0,0,0,0.3)",
-              }}
-              style={{ transform: "translateZ(100px)" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={handleSignOut}
-              className="btn btn-xs md:btn-md btn-primary hover:bg-secondary transition-colors  duration-200"
+        <div className="navbar-end flex-nowrap gap-1 sm:gap-2">
+          {user ? (
+            <Motion.button
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
+              onClick={signOutUser}
+              className="btn btn-primary btn-xs rounded-full px-3 sm:btn-sm sm:px-4"
             >
               Sign Out
-            </motion.button>
-          </>
-        ) : (
-          <>
-            <Link to="/auth/login">
-              <motion.span
-                whileHover={{
-                  rotateX: 20,
-                  rotateY: 15,
-                  boxShadow: "1px 3px 4px 1px 10px",
-                }}
-                style={{ transform: "translateZ(100px)" }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="btn btn-xs md:btn-md btn-primary hover:bg-secondary transition-colors duration-300"
+            </Motion.button>
+          ) : (
+            <>
+              <Link
+                to="/auth/login"
+                className="btn btn-ghost btn-xs rounded-full px-3 text-primary sm:btn-sm sm:px-4"
               >
                 Login
-              </motion.span>
-            </Link>
-            <Link to="/auth/register">
-              <motion.span
-                whileHover={{
-                  rotateX: 20,
-                  rotateY: 15,
-                  boxShadow: "1px 3px 4px 1px 10px",
-                }}
-                style={{ transform: "translateZ(100px)" }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="btn btn-xs md:btn-md btn-outline btn-primary hover:bg-primary hover:text-white transition-colors duration-300"
+              </Link>
+              <Link
+                to="/auth/register"
+                className="btn btn-primary btn-xs rounded-full px-3 shadow-md shadow-primary/20 sm:btn-sm sm:px-4"
               >
                 Register
-              </motion.span>
-            </Link>
-          </>
-        )}
+              </Link>
+            </>
+          )}
+          <Theme />
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 

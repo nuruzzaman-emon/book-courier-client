@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  reauthenticateWithCredential,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
@@ -16,15 +19,14 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [, setProfileRevision] = useState(0);
 
   //create user
   const createUser = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   //login user
   const signInUser = (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   //login by google
@@ -33,8 +35,32 @@ const AuthProvider = ({ children }) => {
   };
 
   //update profile
-  const updateUserProfile = (userInfo) => {
-    return updateProfile(auth.currentUser, userInfo);
+  const updateUserProfile = async (userInfo) => {
+    await updateProfile(auth.currentUser, userInfo);
+    setProfileRevision((revision) => revision + 1);
+  };
+
+  const changeUserPassword = async (currentPassword, newPassword) => {
+    const currentUser = auth.currentUser;
+    if (!currentUser?.email) {
+      throw new Error("A signed-in email account is required to change password.");
+    }
+    if (
+      !currentUser.providerData.some(
+        (provider) => provider.providerId === "password",
+      )
+    ) {
+      throw new Error(
+        "This account does not have an email password. Sign in with your account provider instead.",
+      );
+    }
+
+    const credential = EmailAuthProvider.credential(
+      currentUser.email,
+      currentPassword,
+    );
+    await reauthenticateWithCredential(currentUser, credential);
+    await updatePassword(currentUser, newPassword);
   };
 
   //forget password
@@ -44,7 +70,6 @@ const AuthProvider = ({ children }) => {
 
   //sign out user
   const signOutUser = () => {
-    setLoading(true);
     return signOut(auth);
   };
 
@@ -66,6 +91,7 @@ const AuthProvider = ({ children }) => {
     signInUser,
     signInWithGoogle,
     updateUserProfile,
+    changeUserPassword,
     forgetPassword,
     signOutUser,
   };
